@@ -10,6 +10,9 @@
 
 #include <TGNumberEntry.h>
 #include <TGButton.h>
+#include <TGFrame.h>
+#include <TGClient.h>
+
 
 class MyMainFrame : public TGMainFrame {
   private: 
