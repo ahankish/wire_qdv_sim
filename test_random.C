@@ -8,6 +8,35 @@
 #include<TROOT.h>
 #include<TPaveText.h>
 
+#include <TGNumberEntry.h>
+#include <TGButton.h>
+
+class MyMainFrame : public TGMainFrame {
+  private: 
+  TGMainFrame *fMain;
+
+  public: 
+  MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h);
+
+  void CloseWindow();
+  virtual ~MyMainFrame();
+
+};
+
+//constructor of the gui window(s)
+MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p, w, h){
+
+  SetCleanup(kDeepCleanup); // cleans up the gui windows and canvases
+  
+  // mainframe
+  fMain = new TGMainFrame(p, w, h);
+
+
+
+}
+
+// constants that do NOT change from wire-to-wire
+
 const double DCT_wire_length=450.0; // same as geometry toml file
 const double DCT_wire_resistance=2200.0; // in Ohms
 const double MIN_CHARGEDIV=0.0;
@@ -39,12 +68,27 @@ void make_histo_pretty_qdvpos(TH1D* h){
   h->Draw();
 }
 
+// for cleaning up the gui
+MyMainFrame::~MyMainFrame() { 
+  fMain->Cleanup();
+  delete fMain;
+}
+
+// for an exit button 
+void MyMainFrame::CloseWindow(){
+	DeleteWindow();
+}
+
 void test_random()
 {
+  // constants that might change from wire-to-wire:
+
   double termination_resN=1.5*DCT_wire_resistance;
   double termination_resS=1.1*DCT_wire_resistance;
   double Gain_ratio=0.5;
   double Gain_ratio2=1.3;
+
+
   int num_entries=100000;
   gROOT->Reset();
   TStyle * plain = new TStyle("plain","plain");
@@ -154,4 +198,8 @@ void test_random()
   c->SaveAs("ex1.eps");
   c->SaveAs("ex1.png");
   c->SaveAs("ex1.root");*/
+
+
+  // new additions for the user input gui: 
+  new MyMainFrame(gClient->GetRoot(), 500, 500);
 }
