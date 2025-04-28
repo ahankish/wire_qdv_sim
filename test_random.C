@@ -15,6 +15,13 @@ class MyMainFrame : public TGMainFrame {
   private: 
   TGMainFrame *fMain;
 
+  // number entries - user input values 
+  TGNumberEntry *fTerm_resN; 
+  TGNumberEntry *fTerm_resS;
+  TGNumberEntry *fGain_ratioN;
+  TGNumberEntry *fGain_ratioS;
+  TGLabel *fLabel;
+
   public: 
   MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h);
 
@@ -31,6 +38,11 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
   // mainframe
   fMain = new TGMainFrame(p, w, h);
 
+  // creating a frame for the number entries 
+	dframe = new TGVerticalFrame(fMain, 5, 100); 
+	fMain->AddFrame(dframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
+
+  fTerm_resN = new TGNumberEntry();
 
 
 }
