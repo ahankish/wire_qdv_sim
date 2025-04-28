@@ -108,7 +108,7 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
 
 
   // defaults of the gui
-	fMain->SetWindowName("Calculate Pi");
+	fMain->SetWindowName("Wire Model Simulation");
 	fMain->MapSubwindows();
 	fMain->Resize(GetDefaultSize());
 	fMain->MapWindow();
