@@ -106,6 +106,12 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
 	bframe->AddFrame(hist, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5));
   hist->Connect("Clicked()", "MyMainFrame", this, "GraphModel()"); 
 
+
+  // defaults of the gui
+	fMain->SetWindowName("Calculate Pi");
+	fMain->MapSubwindows();
+	fMain->Resize(GetDefaultSize());
+	fMain->MapWindow();
 }
 
 // constants that do NOT change from wire-to-wire
