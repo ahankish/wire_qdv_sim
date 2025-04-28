@@ -16,10 +16,10 @@ class MyMainFrame : public TGMainFrame {
   TGMainFrame *fMain;
 
   // number entries - user input values 
-  TGNumberEntry *fTerm_resN; 
-  TGNumberEntry *fTerm_resS;
-  TGNumberEntry *fGain_ratioN;
-  TGNumberEntry *fGain_ratioS;
+  TGNumberEntry *term_resN; 
+  TGNumberEntry *term_resS;
+  TGNumberEntry *gain_ratioN;
+  TGNumberEntry *gain_ratioS;
   TGLabel *fLabel;
 
   public: 
@@ -42,7 +42,20 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
 	dframe = new TGVerticalFrame(fMain, 5, 100); 
 	fMain->AddFrame(dframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
 
-  fTerm_resN = new TGNumberEntry();
+  term_resN = new TGNumberEntry(dframe);
+  term_resN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValue()");
+  (term_resN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "Setvalue()");
+  dframe->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+
+  term_resS = new TGNumberEntry(dframe);
+  dframe->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+
+  gain_ratioN = new TGNumberEntry(dframe);
+  dframe->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+
+  gain_ratioS = new TGNumberEntry(dframe);
+  dframe->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+
 
 
 }
@@ -89,6 +102,27 @@ MyMainFrame::~MyMainFrame() {
 // for an exit button 
 void MyMainFrame::CloseWindow(){
 	DeleteWindow();
+}
+
+// setting the value of a variable 
+void MyMainFrame::SetValueResN(){
+
+  termination_resN = term_resN->GetNumberEntry();
+}
+
+void MyMainFrame::SetValueResS(){
+
+  termination_resS = term_resS->GetNumberEntry();
+}
+
+void MyMainFrame::SetValueGainN(){
+
+  Gain_ratio = gain_ratioN->GetNumberEntry();
+}
+
+void MyMainFrame::SetValueGainS(){
+
+  Gain_ratio2 = gain_ratioS->GetNumberEntry();
 }
 
 void test_random()
