@@ -14,6 +14,8 @@
 class MyMainFrame : public TGMainFrame {
   private: 
   TGMainFrame *fMain;
+  TGVerticalFrame *iframe;
+  TGVerticalFrame *bframe;
 
   // number entries - user input values 
   TGNumberEntry *term_resN; 
@@ -22,11 +24,28 @@ class MyMainFrame : public TGMainFrame {
   TGNumberEntry *gain_ratioS;
   TGLabel *fLabel;
 
+  double termination_resN;
+  double termination_resS;
+  double Gain_ratio;
+  double Gain_ratio2;
+
+  // buttons 
+  TGTextButton *quit; // button for exiting the gui and root terminal
+  TGTextButton *hist; // button for redrawing the histogram w/ updated conditions
+
   public: 
   MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h);
 
   void CloseWindow();
   virtual ~MyMainFrame();
+
+  // 
+  void SetValueResN();
+  void SetValueResS();
+  void SetValueGainN();
+  void SetValueGainS();
+
+  void GraphModel();
 
 };
 
@@ -38,25 +57,51 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
   // mainframe
   fMain = new TGMainFrame(p, w, h);
 
+
+  // setting these to some values so cling doesn't get mad
+  termination_resN=0.1;
+  termination_resS=0.1;
+  Gain_ratio=0.5;
+  Gain_ratio2=1.3;
+
+
   // creating a frame for the number entries 
-	dframe = new TGVerticalFrame(fMain, 5, 100); 
-	fMain->AddFrame(dframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
+	iframe = new TGVerticalFrame(fMain, 5, 100); 
+	fMain->AddFrame(iframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
 
-  term_resN = new TGNumberEntry(dframe);
-  term_resN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValue()");
-  (term_resN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "Setvalue()");
-  dframe->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  bframe = new TGVerticalFrame(fMain, 5, 100); 
+	fMain->AddFrame(bframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
 
-  term_resS = new TGNumberEntry(dframe);
-  dframe->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  term_resN = new TGNumberEntry(iframe);
+  term_resN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueResN()");
+  (term_resN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueResN()");
+  iframe->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  gain_ratioN = new TGNumberEntry(dframe);
-  dframe->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  term_resS = new TGNumberEntry(iframe);
+  term_resS->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueResS()");
+  (term_resS->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueResS()");
+  iframe->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  gain_ratioS = new TGNumberEntry(dframe);
-  dframe->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gain_ratioN = new TGNumberEntry(iframe);
+  gain_ratioN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainN()");
+  (gain_ratioN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainN()");
+  iframe->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+
+  gain_ratioS = new TGNumberEntry(iframe);
+  gain_ratioS->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainS()");
+  (gain_ratioS->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainS()");
+  iframe->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
+  // buttons - for exiting the window and for redrawing the histograms
+
+  quit = new TGTextButton(bframe, "&Exit");
+	bframe->AddFrame(quit, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5));
+  quit->Connect("Clicked()", "TApplication", gApplication, "Terminate()");
+
+  hist = new TGTextButton(bframe, "&Draw Histogram");
+	bframe->AddFrame(hist, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5));
+  hist->Connect("Clicked()", "MyMainFrame", this, "GraphModel()"); 
 
 }
 
@@ -104,35 +149,41 @@ void MyMainFrame::CloseWindow(){
 	DeleteWindow();
 }
 
+
 // setting the value of a variable 
 void MyMainFrame::SetValueResN(){
 
-  termination_resN = term_resN->GetNumberEntry();
+  termination_resN = term_resN->GetNumberEntry()->GetNumber();
 }
 
 void MyMainFrame::SetValueResS(){
 
-  termination_resS = term_resS->GetNumberEntry();
+  termination_resS = term_resS->GetNumberEntry()->GetNumber();
 }
 
 void MyMainFrame::SetValueGainN(){
 
-  Gain_ratio = gain_ratioN->GetNumberEntry();
+  Gain_ratio = gain_ratioN->GetNumberEntry()->GetNumber();
 }
 
 void MyMainFrame::SetValueGainS(){
 
-  Gain_ratio2 = gain_ratioS->GetNumberEntry();
+  Gain_ratio2 = gain_ratioS->GetNumberEntry()->GetNumber();
 }
 
-void test_random()
+
+// graphing the histogram(s)
+void MyMainFrame::GraphModel()
 {
   // constants that might change from wire-to-wire:
 
+  /*
   double termination_resN=1.5*DCT_wire_resistance;
   double termination_resS=1.1*DCT_wire_resistance;
   double Gain_ratio=0.5;
   double Gain_ratio2=1.3;
+  */
+  
 
 
   int num_entries=100000;
@@ -245,7 +296,9 @@ void test_random()
   c->SaveAs("ex1.png");
   c->SaveAs("ex1.root");*/
 
+}
 
-  // new additions for the user input gui: 
+void test_random() {
+  // new additions for the user input via a gui: 
   new MyMainFrame(gClient->GetRoot(), 500, 500);
 }
