@@ -25,7 +25,11 @@ class MyMainFrame : public TGMainFrame {
   TGNumberEntry *term_resS;
   TGNumberEntry *gain_ratioN;
   TGNumberEntry *gain_ratioS;
-  TGLabel *fLabel;
+  
+  TGGroupFrame *gfResN;
+  TGGroupFrame *gfResS;
+  TGGroupFrame *gfGainN;
+  TGGroupFrame *gfGainS;
 
   double termination_resN;
   double termination_resS;
@@ -68,32 +72,41 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
   Gain_ratio2=1.3;
 
 
-  // creating a frame for the number entries 
-	iframe = new TGVerticalFrame(fMain, 5, 100); 
-	fMain->AddFrame(iframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
-
+  // creating a frames for the number entries and buttons
   bframe = new TGVerticalFrame(fMain, 5, 100); 
 	fMain->AddFrame(bframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
 
-  term_resN = new TGNumberEntry(iframe);
+  gfResN = new TGGroupFrame(fMain, "North Termination Resistance");
+  gfResS = new TGGroupFrame(fMain, "South Termination Resistance");
+  gfGainN = new TGGroupFrame(fMain, "North Gain Factor");
+  gfGainS = new TGGroupFrame(fMain, "North Gain Factor");
+
+  fMain->AddFrame(gfResN, new TGLayoutHints(kLHintsTop, 5, 5, 5, 5));
+  fMain->AddFrame(gfResS, new TGLayoutHints(kLHintsTop, 5, 5, 5, 5));
+  fMain->AddFrame(gfGainN, new TGLayoutHints(kLHintsTop, 5, 5, 5, 5));
+  fMain->AddFrame(gfGainS, new TGLayoutHints(kLHintsTop, 5, 5, 5, 5));
+
+
+  // number entry boxes for gain and termination resistance 
+  term_resN = new TGNumberEntry(gfResN);
   term_resN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueResN()");
   (term_resN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueResN()");
-  iframe->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gfResN->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  term_resS = new TGNumberEntry(iframe);
+  term_resS = new TGNumberEntry(gfResS);
   term_resS->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueResS()");
   (term_resS->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueResS()");
-  iframe->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gfResS->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  gain_ratioN = new TGNumberEntry(iframe);
+  gain_ratioN = new TGNumberEntry(gfGainN);
   gain_ratioN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainN()");
   (gain_ratioN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainN()");
-  iframe->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gfGainN->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  gain_ratioS = new TGNumberEntry(iframe);
+  gain_ratioS = new TGNumberEntry(gfGainS);
   gain_ratioS->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainS()");
   (gain_ratioS->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainS()");
-  iframe->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gfGainS->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
   // buttons - for exiting the window and for redrawing the histograms
@@ -308,6 +321,9 @@ void MyMainFrame::GraphModel()
 }
 
 void test_random() {
+  // for changing the object lifetime management 
+  TH1::AddDirectory(false);
+
   // new additions for the user input via a gui: 
   new MyMainFrame(gClient->GetRoot(), 500, 500);
 }
