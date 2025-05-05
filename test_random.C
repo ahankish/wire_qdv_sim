@@ -51,8 +51,7 @@ class MyMainFrame : public TGMainFrame {
   void CloseWindow();
   virtual ~MyMainFrame();
 
-  // 
-  void SetValue(TGNumberEntry* num_entry, double var_name, double gain_var=1);
+  //void SetValue(TGNumberEntry* num_entry, double var_name, double gain_var=1);
 
   void SetValueResN();
   void SetValueResS();
@@ -129,7 +128,6 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
 
   gainN = new TGLabel(gfGainN, Form("Gain (North): %g", Gain_ratio2));
   gfGainN->AddFrame(gainN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
-
 
 
   // buttons - for exiting the window and for redrawing the histograms
