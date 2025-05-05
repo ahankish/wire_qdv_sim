@@ -25,21 +25,23 @@ class MyMainFrame : public TGMainFrame {
   TGNumberEntry *gain_ratioN;
   TGNumberEntry *gain_ratioS;
   
-  TGGroupFrame *gfResN;
-  TGGroupFrame *gfResS;
-  TGGroupFrame *gfGainN;
-  TGGroupFrame *gfGainS;
+  // groupframes to host and label the input boxes 
+  TGGroupFrame *gf_resN;
+  TGGroupFrame *gf_resS;
+  TGGroupFrame *gf_gainN;
+  TGGroupFrame *gf_gainS;
 
-  TGLabel *resN;
-  TGLabel *resS;
-  TGLabel *gainN;
-  TGLabel *gainS;
+  // labels to display the current value of each variable 
+  TGLabel *resN_label;
+  TGLabel *resS_label;
+  TGLabel *gainN_label;
+  TGLabel *gainS_label;
 
-
+  // variables to store the user input values in
   double termination_resN;
   double termination_resS;
-  double Gain_ratio;
-  double Gain_ratio2;
+  double south_gain;
+  double north_gain;
 
   // buttons 
   TGTextButton *quit; // button for exiting the gui and root terminal
@@ -51,8 +53,7 @@ class MyMainFrame : public TGMainFrame {
   void CloseWindow();
   virtual ~MyMainFrame();
 
-  //void SetValue(TGNumberEntry* num_entry, double var_name, double gain_var=1);
-
+  // for setting the variables to the input values 
   void SetValueResN();
   void SetValueResS();
   void SetValueGainN();
@@ -74,60 +75,68 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
   // setting these to some values so cling doesn't get mad?
   termination_resN=0;
   termination_resS=0;
-  Gain_ratio=1;
-  Gain_ratio2=1;
+  south_gain=1; 
+  north_gain=1;
 
 
   // creating frames for the number entries and buttons
-  bframe = new TGVerticalFrame(fMain, 5, 100); 
+
+  bframe = new TGVerticalFrame(fMain, 5, 100); // button frame
 	fMain->AddFrame(bframe, new TGLayoutHints(kLHintsLeft, 5, 5, 5, 5));
 
-  gfResN = new TGGroupFrame(fMain, "North Termination Resistance");
-  gfResS = new TGGroupFrame(fMain, "South Termination Resistance");
-  gfGainN = new TGGroupFrame(fMain, "North Gain Factor");
-  gfGainS = new TGGroupFrame(fMain, "South Gain Factor");
+  // adding values to pointers with new groupframes for each variable 
+  gf_resN = new TGGroupFrame(fMain, "North Termination Resistance");
+  gf_resS = new TGGroupFrame(fMain, "South Termination Resistance");
+  gf_gainN = new TGGroupFrame(fMain, "North Gain Factor");
+  gf_gainS = new TGGroupFrame(fMain, "South Gain Factor");
 
-  fMain->AddFrame(gfResN, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
-  fMain->AddFrame(gfResS, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
-  fMain->AddFrame(gfGainN, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
-  fMain->AddFrame(gfGainS, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
+  // adding the groupframes to the mainframe
+  fMain->AddFrame(gf_resN, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
+  fMain->AddFrame(gf_resS, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
+  fMain->AddFrame(gf_gainN, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
+  fMain->AddFrame(gf_gainS, new TGLayoutHints(kLHintsTop | kLHintsExpandX, 5, 5, 5, 5));
 
 
-  // number entry boxes for gain and termination resistance 
-  term_resN = new TGNumberEntry(gfResN);
+  // number entry boxes for gain and termination resistance - connected after the user presses 'enter'
+
+  term_resN = new TGNumberEntry(gf_resN);
   term_resN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueResN()");
   (term_resN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueResN()");
-  gfResN->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gf_resN->AddFrame(term_resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  resN = new TGLabel(gfResN, Form("Termination Res (North): %g", termination_resN));
-  gfResN->AddFrame(resN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  // displays user input for north termination resistance
+  resN_label = new TGLabel(gf_resN, Form("Termination Res (North): %g", termination_resN)); 
+  gf_resN->AddFrame(resN_label, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
-  term_resS = new TGNumberEntry(gfResS);
+  term_resS = new TGNumberEntry(gf_resS);
   term_resS->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueResS()");
   (term_resS->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueResS()");
-  gfResS->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gf_resS->AddFrame(term_resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  resS = new TGLabel(gfResS, Form("Termination Res (South): %g", termination_resS));
-  gfResS->AddFrame(resS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  // displays user input for south termination resistance
+  resS_label = new TGLabel(gf_resS, Form("Termination Res (South): %g", termination_resS)); 
+  gf_resS->AddFrame(resS_label, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
-  gain_ratioS = new TGNumberEntry(gfGainS);
+  gain_ratioS = new TGNumberEntry(gf_gainS);
   gain_ratioS->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainS()");
   (gain_ratioS->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainS()");
-  gfGainS->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gf_gainS->AddFrame(gain_ratioS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  gainS = new TGLabel(gfGainS, Form("Gain (South): %g", Gain_ratio));
-  gfGainS->AddFrame(gainS, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  // displays the user input value for south gain
+  gainS_label = new TGLabel(gf_gainS, Form("Gain (South): %g", south_gain)); 
+  gf_gainS->AddFrame(gainS_label, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
-  gain_ratioN = new TGNumberEntry(gfGainN);
+  gain_ratioN = new TGNumberEntry(gf_gainN);
   gain_ratioN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainN()");
   (gain_ratioN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainN()");
-  gfGainN->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  gf_gainN->AddFrame(gain_ratioN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
-  gainN = new TGLabel(gfGainN, Form("Gain (North): %g", Gain_ratio2));
-  gfGainN->AddFrame(gainN, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
+  // displays the user input value for north gain
+  gainN_label = new TGLabel(gf_gainN, Form("Gain (North): %g", north_gain)); 
+  gf_gainN->AddFrame(gainN_label, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
   // buttons - for exiting the window and for redrawing the histograms
@@ -192,48 +201,41 @@ void MyMainFrame::CloseWindow(){
 }
 
 
-// setting the value of a variable 
-/*
-void MyMainFrame::SetValue(TGNumberEntry* num_entry, double var_name, double gain_var=1){
-
-  var_name = num_entry->GetNumberEntry()->GetNumber() / gain_var;
-}
-*/
-
+// setting variables to the user input values 
 void MyMainFrame::SetValueResN(){
 
   termination_resN = term_resN->GetNumberEntry()->GetNumber();
-  resN->SetText(Form("Termination Res (North): %g", termination_resN));
+  resN_label->SetText(Form("Termination Res (North): %g", termination_resN));
 
-  gfResN->Layout();
+  gf_resN->Layout();
 
 }
 
 void MyMainFrame::SetValueResS(){
 
   termination_resS = term_resS->GetNumberEntry()->GetNumber();
-  resS->SetText(Form("Termination Res (South): %g", termination_resS));
+  resS_label->SetText(Form("Termination Res (South): %g", termination_resS));
 
-  gfResS->Layout();
+  gf_resS->Layout();
 
 }
 
 void MyMainFrame::SetValueGainN(){
 
-  Gain_ratio2 = gain_ratioN->GetNumberEntry()->GetNumber();
-  gainN->SetText(Form("Gain (North): %g", Gain_ratio2));
+  north_gain = gain_ratioN->GetNumberEntry()->GetNumber();
+  gainN_label->SetText(Form("Gain (North): %g", north_gain));
 
-  gfGainN->Layout();
+  gf_gainN->Layout();
 
 }
 
 
 void MyMainFrame::SetValueGainS(){
 
-  Gain_ratio = gain_ratioS->GetNumberEntry()->GetNumber();
-  gainS->SetText(Form("Gain (South): %g", Gain_ratio));
+  south_gain = gain_ratioS->GetNumberEntry()->GetNumber();
+  gainS_label->SetText(Form("Gain (South): %g", south_gain));
 
-  gfGainS->Layout();
+  gf_gainS->Layout();
 
 }
 
@@ -297,7 +299,7 @@ void MyMainFrame::GraphModel()
     
     //double qdv_new=total_resS/(total_resS+(Gain_ratio2*total_resN));
     
-    double qdv_new=(Gain_ratio2/Gain_ratio)*total_resN/(total_resS+(Gain_ratio2*total_resN/Gain_ratio));
+    double qdv_new=(north_gain/south_gain)*total_resN/(total_resS+(north_gain*total_resN/south_gain));
 
     h_calcqdv->Fill(qdv_new);
     //qdv_new=res_south/(res_south+(Gain_ratio2*res_north));
