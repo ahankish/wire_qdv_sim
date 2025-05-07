@@ -13,6 +13,8 @@
 #include <TGFrame.h>
 #include <TGClient.h>
 
+#include <string>
+
 
 class MyMainFrame : public TGMainFrame {
   private: 
@@ -54,12 +56,14 @@ class MyMainFrame : public TGMainFrame {
   virtual ~MyMainFrame();
 
   // for setting the variables to the input values 
+  //void SetValue(double var, TGNumberEntry* num_entry, TGLabel* label, TGGroupFrame* gframe, string str);
+
   void SetValueResN();
   void SetValueResS();
   void SetValueGainN();
   void SetValueGainS();
 
-  void GraphModel();
+  void GraphModel(); // graphs the histograms 
 
 };
 
@@ -129,6 +133,10 @@ MyMainFrame::MyMainFrame(const TGWindow *p, UInt_t w, UInt_t h) : TGMainFrame(p,
   gf_gainS->AddFrame(gainS_label, new TGLayoutHints(kLHintsLeft | kLHintsExpandX, 5, 5, 5, 5)); 
 
 
+  /*
+  gain_ratioN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValue(north_gain, gain_ratioN, gainN_label, gf_gainN, " Gain (North)" )");
+  (gain_ratioN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValue(north_gain, gain_ratioN, gainN_label, gf_gainN, " Gain (North)" )");
+  */
   gain_ratioN = new TGNumberEntry(gf_gainN);
   gain_ratioN->Connect("ValueSet(Long_t)", "MyMainFrame", this, "SetValueGainN()");
   (gain_ratioN->GetNumberEntry())->Connect("ReturnPressed()", "MyMainFrame", this, "SetValueGainN()");
@@ -202,6 +210,18 @@ void MyMainFrame::CloseWindow(){
 
 
 // setting variables to the user input values 
+
+/*
+void MyMainFrame::SetValue(double var, TGNumberEntry* num_entry, TGLabel* label, TGGroupFrame* gframe, string str) {
+  var = num_entry->GetNumberEntry()->GetNumber();
+
+  string gframe_name = str + ": %g";
+  label->SetText(Form(gframe_name, var));
+
+  gframe->Layout();
+}
+*/
+
 void MyMainFrame::SetValueResN(){
 
   termination_resN = term_resN->GetNumberEntry()->GetNumber();
