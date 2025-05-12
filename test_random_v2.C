@@ -157,12 +157,14 @@ int main(int argc, char *argv[]) {
   make_histo_pretty_qdvpos(h_true_pos);
 
   // saving the histogram: 
-  string file_name = argv[1] + "_" + argv[2] + "_" + argv[3] + "_" + argv[4]; // no null terminator? 
+  string file_name = argv[1] + "_" + argv[2] + "_" + argv[3] + "_" + argv[4] + ".root"; // no null terminator? 
 
-  std::unique_ptr<TFile> myFile( TFile::Open("file.root", "RECREATE") );
+  std::unique_ptr<TFile> myFile( TFile::Open(file_name, "RECREATE") );
+
+  myFile->WriteObject(&myObject, file_name);
 
 
-  TFile *file = new TFile(file_name, ); // new file for saving the histogram 
+  //TFile *file = new TFile(file_name, ); // new file for saving the histogram 
   //c->SetDirectory(0);
   //file->WriteObject(c, file_name); // writing the canvas/histogram to the new file
 
