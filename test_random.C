@@ -13,7 +13,7 @@
 #include <TGFrame.h>
 #include <TGClient.h>
 
-#include <string>
+//#include <string>
 
 
 class MyMainFrame : public TGMainFrame {
