@@ -9,6 +9,7 @@
 #include<TPaveText.h>
 
 #include <string>
+#include <TFile.h>
 
 // constants that do NOT change from wire-to-wire
 
@@ -17,6 +18,7 @@ const double DCT_wire_resistance=2200.0; // in Ohms
 const double MIN_CHARGEDIV=0.0;
 const double MAX_CHARGEDIV=1.0;
 const double fXPos = 0.0;
+
 double convert_qdv_to_r_n(double in){
   return (1.0-in)*DCT_wire_resistance;
 }
@@ -156,12 +158,16 @@ int main(int argc, char *argv[]) {
 
   // saving the histogram: 
   string file_name = argv[1] + "_" + argv[2] + "_" + argv[3] + "_" + argv[4]; // no null terminator? 
+
+  std::unique_ptr<TFile> myFile( TFile::Open("file.root", "RECREATE") );
+
+
   TFile *file = new TFile(file_name, ); // new file for saving the histogram 
   //c->SetDirectory(0);
   //file->WriteObject(c, file_name); // writing the canvas/histogram to the new file
 
   // for changing the object lifetime management (avoiding memory leaks)
-  TH1::AddDirectory(false);
+  TH1::AddDirectory(false); // is this necessary now? 
 
   return 0;
 
