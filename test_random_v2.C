@@ -156,12 +156,35 @@ int main(int argc, char *argv[]) {
   c2->SetTopMargin(0.04);
   make_histo_pretty_qdvpos(h_true_pos);
 
+
   // saving the histogram: 
-  string file_name = argv[1] + "_" + argv[2] + "_" + argv[3] + "_" + argv[4] + ".root"; // no null terminator? 
+  char file_name_c[] = "";
+  char hist_name_c[] = "";
+  char hist_name_cog[] = "";
+
+  
+  std::string term_resN_str(argv[1]);
+  std::string term_resS_str(argv[2]);
+  std::string gainN_str(argv[3]);
+  std::string gainS_str(argv[4]);
+
+
+  //std::string underscore("_");
+
+
+
+  std::strcat(file_name_c, argv[1], "_", argv[2], "_", argv[3], "_", argv[4], ".root"); // no null terminator? 
+  std::strcat(hist_name_c, term_resN_str, "_", term_resS_str, "_", gainN_str, "_", gainS_str);
+  std::strcat(hist_name_cog, hist_name);
+
+  std::string file_name(file_name_c);
+  std::string hist_name(hist_name_c);
+  std::string hist_name_original(hist_name_c);
 
   std::unique_ptr<TFile> myFile( TFile::Open(file_name, "RECREATE") );
 
-  myFile->WriteObject(&myObject, file_name);
+  myFile->WriteObject(&c, hist_name);
+  myFile->WriteObject(&c2, hist_name_original);
 
 
   //TFile *file = new TFile(file_name, ); // new file for saving the histogram 
