@@ -148,7 +148,7 @@ int main(int argc, char *argv[]) {
   h_calcqdv->Draw();
   //h_calcqdv2->Draw("SAME");
   h_div->Draw("SAME");
-  c->SaveAs("GainRatio_resistance_model.png");
+  // c->SaveAs("GainRatio_resistance_model.png"); // SAVING THE HISTOGRAM AS A PNG 
 
   TCanvas * c2 = new TCanvas("c_ref2","c_title2", 200,50,600,600);
   c2->SetLeftMargin(0.15);
@@ -158,33 +158,34 @@ int main(int argc, char *argv[]) {
 
 
   // saving the histogram: 
-  char file_name_c[] = "";
-  char hist_name_c[] = "";
-  char hist_name_cog[] = "";
-
   
   std::string term_resN_str(argv[1]);
   std::string term_resS_str(argv[2]);
   std::string gainN_str(argv[3]);
   std::string gainS_str(argv[4]);
 
+  std::string underscore = "_";
+  std::string root_str = ".root";
+  std::string original = "_original";
 
-  //std::string underscore("_");
 
 
+  //std::strcat(file_name_c, std::strcat(argv[1], std::strcat(underscore, std::strcat(argv[2], std::strcat(underscore, std::strcat(argv[3], std::strcat(underscore, std::strcat(argv[4], root_str)))))))); // no null terminator? 
+  //std::strcat(hist_name_c, std::strcat(argv[1], std::strcat(underscore, std::strcat(argv[2], std::strcat(underscore, std::strcat(argv[3], std::strcat(underscore, argv[4]))))))); // no null terminator? 
+  //std::strcat(hist_name_c, term_resN_str, "_", term_resS_str, "_", gainN_str, "_", gainS_str);
 
-  std::strcat(file_name_c, argv[1], "_", argv[2], "_", argv[3], "_", argv[4], ".root"); // no null terminator? 
-  std::strcat(hist_name_c, term_resN_str, "_", term_resS_str, "_", gainN_str, "_", gainS_str);
-  std::strcat(hist_name_cog, hist_name);
+  std::string file_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + root_str;
+  std::string hist_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str;
+  std::string hist_name_og = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + original;
 
-  std::string file_name(file_name_c);
-  std::string hist_name(hist_name_c);
-  std::string hist_name_original(hist_name_c);
+  const char *file_name_c = file_name.c_str();
+  const char *hist_name_c = hist_name.c_str(); 
+  const char* hist_name_cog = hist_name_og.c_str();
 
-  std::unique_ptr<TFile> myFile( TFile::Open(file_name, "RECREATE") );
+  std::unique_ptr<TFile> myFile( TFile::Open(file_name_c, "RECREATE") );
 
-  myFile->WriteObject(&c, hist_name);
-  myFile->WriteObject(&c2, hist_name_original);
+  myFile->WriteObject(&c, hist_name_c);
+  myFile->WriteObject(&c2, hist_name_cog);
 
 
   //TFile *file = new TFile(file_name, ); // new file for saving the histogram 
