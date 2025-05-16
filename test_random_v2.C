@@ -179,13 +179,17 @@ int main(int argc, char *argv[]) {
   std::string hist_name_og = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + original;
 
   const char *file_name_c = file_name.c_str();
-  const char *hist_name_c = hist_name.c_str(); 
-  const char* hist_name_cog = hist_name_og.c_str();
+  const char *hist_name_c = hist_name.c_str(); // histogram with the comparison of parameters
+  const char* hist_name_cog = hist_name_og.c_str(); // histogram with the random dist. of preset parameters 
 
   std::unique_ptr<TFile> myFile( TFile::Open(file_name_c, "RECREATE") );
 
-  myFile->WriteObject(&c, hist_name_c);
-  myFile->WriteObject(&c2, hist_name_cog);
+
+  c->Write();
+  c2->Write();
+
+  //myFile->WriteObject(&c, "c");
+  //myFile->WriteObject(&c2, "c2");
 
 
   //TFile *file = new TFile(file_name, ); // new file for saving the histogram 
