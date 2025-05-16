@@ -175,12 +175,12 @@ int main(int argc, char *argv[]) {
   //std::strcat(hist_name_c, term_resN_str, "_", term_resS_str, "_", gainN_str, "_", gainS_str);
 
   std::string file_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + root_str;
-  std::string hist_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str;
-  std::string hist_name_og = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + original;
+  //std::string hist_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str;
+  //std::string hist_name_og = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + original;
 
   const char *file_name_c = file_name.c_str();
-  const char *hist_name_c = hist_name.c_str(); // histogram with the comparison of parameters
-  const char* hist_name_cog = hist_name_og.c_str(); // histogram with the random dist. of preset parameters 
+  //const char *hist_name_c = hist_name.c_str(); // histogram with the comparison of parameters
+  //const char* hist_name_cog = hist_name_og.c_str(); // histogram with the random dist. of preset parameters 
 
   std::unique_ptr<TFile> myFile( TFile::Open(file_name_c, "RECREATE") );
 
