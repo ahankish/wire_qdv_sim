@@ -168,12 +168,6 @@ int main(int argc, char *argv[]) {
   std::string root_str = ".root";
   std::string original = "_original";
 
-
-
-  //std::strcat(file_name_c, std::strcat(argv[1], std::strcat(underscore, std::strcat(argv[2], std::strcat(underscore, std::strcat(argv[3], std::strcat(underscore, std::strcat(argv[4], root_str)))))))); // no null terminator? 
-  //std::strcat(hist_name_c, std::strcat(argv[1], std::strcat(underscore, std::strcat(argv[2], std::strcat(underscore, std::strcat(argv[3], std::strcat(underscore, argv[4]))))))); // no null terminator? 
-  //std::strcat(hist_name_c, term_resN_str, "_", term_resS_str, "_", gainN_str, "_", gainS_str);
-
   std::string file_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + root_str;
   //std::string hist_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str;
   //std::string hist_name_og = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + original;
