@@ -301,8 +301,7 @@ void MyMainFrame::GraphModel()
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
-    if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
-    else qdv_true=gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
+    qdv_true = gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
     //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
