@@ -24,3 +24,30 @@ do
     done 
   done
 done
+
+: << 'COMMENT'
+# customize top and bottom of ranges: 
+
+# changing the wire parameters 
+echo "Termination Resistance (N) Range: [$1, $2]"
+echo "Termination Resistance (S) Range: [$3, $4]"
+echo "Gain Factor (N) Range: [$5, $6]"
+echo "Gain Factor (S) Range: [$7, $8]"
+
+
+
+# input values go into the test and a root file is created with that name
+for (( n=$1 ; n<=$2 ; n++ )); 
+do
+  for (( i=$3 ; i<=$4 ; i++ )); 
+  do 
+    for (( j=$5 ; j<=$6 ; j++ )); 
+    do 
+      for (( k=$7 ; k<=$8 ; k++ )); 
+      do 
+        ./test_random_v2 $n $i $j $k  
+      done
+    done 
+  done
+done
+COMMENT 
