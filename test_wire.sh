@@ -1,13 +1,23 @@
 #!/bin/bash
 
- g++ -o test_random_v2 test_random_v2.C $( root-config --libs --cflags ) #compiling the file? 
+# changing the wire parameters - hard-coded (only 2 values per iteration)
 
- ./test_random_v2 10 10 1 1 # running for these values 10 10 1 1 
+# compiling the file ???
+g++ -o test_random_v2 test_random_v2.C $( root-config --libs --cflags )
 
- #using root? 
- root 
- std::unique_ptr<TFile> myFile( TFile::Open("10_10_1_1.root") );
- myFile->ls()
- std::unique_ptr<TH1> hist(myFile->Get<TH1>("c")); # variable with the comparison histogram 
- std::unique_ptr<TH1> hist2(myFile->Get<TH1>("c2")); # variable with the original distribution, no changes to parameters
- .q
+# running for inital parameter values 
+for (( n=10 ; n<21 ; n=n+10 ));
+do
+  for (( i=10 ; i<21 ; i=i+10 )); 
+  do 
+    for (( j=1 ; j<3 ; j++ )); 
+    do 
+      for (( k=1 ; k<3 ; k++)); 
+      do 
+        ./test_random_v2 $n $i $j $k 
+      done
+    done
+  done
+  
+done
+

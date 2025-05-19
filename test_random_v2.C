@@ -88,8 +88,7 @@ int main(int argc, char *argv[]) {
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
-    if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
-    else qdv_true=gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
+    gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
     //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
@@ -161,7 +160,8 @@ int main(int argc, char *argv[]) {
 
 
   // saving the histogram: 
-  
+  std::cout << "Saving histograms to file..." << std::endl;
+
   std::string term_resN_str(argv[1]);
   std::string term_resS_str(argv[2]);
   std::string gainN_str(argv[3]);
@@ -184,6 +184,8 @@ int main(int argc, char *argv[]) {
   // h_true_pos, h_div
   h_true_pos->Write();
   h_calcqdv->Write();
+
+  std::cout << "Histograms saved!" << std::endl;
 
   //myFile->WriteObject(&c, "c");
   //myFile->WriteObject(&c2, "c2");
