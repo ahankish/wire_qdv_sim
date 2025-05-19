@@ -8,3 +8,7 @@ g++ -o test_random_v2 test_random_v2.C $( root-config --libs --cflags )
 # running the file with example numbers for termination resistance and gain factors
 ./test_random_v2 10 10 1 1 
 ```
+
+### 2 scripts: 
+  - **Root Script**: 
+  - **Bash Script**: running the test file with several test values (within a predetermined range) - nested for-loops

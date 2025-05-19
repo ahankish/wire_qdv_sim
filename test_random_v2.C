@@ -89,7 +89,10 @@ int main(int argc, char *argv[]) {
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
     if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
-    else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
+    else qdv_true=gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
+
+    //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
+    //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
     //else qdv_true=gRandom->Gaus(0.5,0.1);  // CHANGE FROM GAUSS DISTRIBUTION TO A UNIFORM RANDOM DISTRIBUTION *************
     //double qdv_true =gRandom->Gaus(0.5,0.1);
     h_div->Fill(qdv_true);
@@ -166,7 +169,7 @@ int main(int argc, char *argv[]) {
 
   std::string underscore = "_";
   std::string root_str = ".root";
-  std::string original = "_original";
+  //std::string original = "_original";
 
   std::string file_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + root_str;
   //std::string hist_name = term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str;
@@ -178,9 +181,9 @@ int main(int argc, char *argv[]) {
 
   std::unique_ptr<TFile> myFile( TFile::Open(file_name_c, "RECREATE") );
 
-
-  c->Write();
-  c2->Write();
+  // h_true_pos, h_div
+  h_true_pos->Write();
+  h_calcqdv->Write();
 
   //myFile->WriteObject(&c, "c");
   //myFile->WriteObject(&c2, "c2");
