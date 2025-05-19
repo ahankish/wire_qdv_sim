@@ -14,24 +14,24 @@ local GAINS = 0
 ./test_random_v2 TERMRES_N TERMRES_S GAINN GAINS 
 
 # input values go into the test and a root file is created with that name
-for n in {1..5}
+for (( n=1 ; n<=$1 ; n++ )); 
 do
-  TERMRES_N = n
+  TERMRES_N = $n
   ./test_random_v2 TERMRES_N TERMRES_S GAINN GAINS 
 
-  for i in {1..5}
+  for (( i=1 ; i<=$2 ; i++ )); 
   do 
-    TERMRES_S = i
+    TERMRES_S = $i
     ./test_random_v2 TERMRES_N TERMRES_S GAINN GAINS 
 
-    for j in {1..5}
+    for (( j=1 ; j<=$3 ; j++ )); 
     do 
-      GAINN = j 
+      GAINN = $j 
       ./test_random_v2 TERMRES_N TERMRES_S GAINN GAINS 
 
-      for k in {1..5} 
+      for (( k=1 ; k<=$4 ; k++ )); 
       do 
-        GAINS = k
+        GAINS = $k
         ./test_random_v2 TERMRES_N TERMRES_S GAINN GAINS  
     done 
   done
