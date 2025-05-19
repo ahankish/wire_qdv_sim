@@ -1,6 +1,6 @@
 # wire_qdv_sim
 
-Wire Charge Division Simulation
+<span style="color:red"> **Wire Charge Division Simulation** </span>
 
 This repository contains files and scripts to test different possible parameters
 for a single wire in drift chamber tracker. The main goal is to use these samples 
@@ -8,7 +8,7 @@ as models to find the most accurate parameters for each wire in the tracker and
 to recalibrate the data that was collected during the 1st flight to reflect 
 more accurate hit positions. 
 
-## What do we already know about the wire?
+## <span style="color:orange"> What do we already know about the wire? </span>
 
 Constants: 
 
@@ -22,14 +22,8 @@ Conventions Used:
 - **South End of the Wire** = 0.0 (x-position)
 - **North End of the Wire** = 1.0 (x-position)
 
-const double DCT_wire_length=450.0; // same as geometry toml file
-const double DCT_wire_resistance=2200.0; // in Ohms
-const double MIN_CHARGEDIV=0.0;
-const double MAX_CHARGEDIV=1.0;
-const double fXPos = 0.0;
 
-
-## Parameters: 
+## <span style="color:orange"> Parameters: </span> 
 
 There are 4 parameters that are varied in this model: 
 
@@ -38,7 +32,7 @@ There are 4 parameters that are varied in this model:
 3. Gain factor for the North end of the wire
 4. Gain factor for the South end of the wire
 
-## Wire Test File: 
+## <span style="color:orange"> Wire Test File: </span>
 
 Command for compiling and executing the code for testing a single wire: 
 ```bash
@@ -48,7 +42,7 @@ g++ -o test_random_v2 test_random_v2.C $( root-config --libs --cflags )
 ./test_random_v2 10 10 1 1 
 ```
 
-### Storage File Format: 
+### <span style="color:yellow"> *Storage File Format:* </span> 
 
 **Filename:** ```termN_termS_gainN_gainS.root```
  with each parameter being a numerical value
@@ -67,7 +61,7 @@ Each file stores **2 histograms:**
 - *"Charge Division"* histogram: 
   - histogram of the wire with the adjusted parameters (model)
 
-## Bash Scripts: 
+## <span style="color:orange"> Bash Scripts: </span> 
 
 Running the test file for a hard-coded set of parameters (16 files created total)
 - runs for: 
