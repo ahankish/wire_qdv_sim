@@ -53,6 +53,10 @@ int main(int argc, char *argv[]) {
   std::cout << "gain N: " << argv[3] << std::endl;
   std::cout << "gain S: " << argv[4] << std::endl;
 
+  // arg[5] is a parameter that tells the program whether or not to save the 
+  // histogram with no adjustments to the parameters to the file 
+  //std::cout << "Save original histogram: " << argv[5] << std::endl; // (boolean) binary value 
+
 
   double termination_resN = atoi(argv[1]);
   double termination_resS = atoi(argv[2]);
@@ -88,7 +92,7 @@ int main(int argc, char *argv[]) {
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
-    gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
+    qdv_true = gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
     //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
@@ -181,8 +185,15 @@ int main(int argc, char *argv[]) {
 
   std::unique_ptr<TFile> myFile( TFile::Open(file_name_c, "RECREATE") );
 
-  // h_true_pos, h_div
-  h_true_pos->Write();
+  // h_true_pos, h_div = histograms generated 
+
+  /*
+  if (atoi(arg[5])) {
+    h_true_pos->Write(); // saves the original histogram value if the user says so 
+  }
+  */
+  h_div->Write();
+  //h_true_pos->Write(); // may remove for the above conditional
   h_calcqdv->Write();
 
   std::cout << "Histograms saved!" << std::endl;
