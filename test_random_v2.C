@@ -58,10 +58,10 @@ int main(int argc, char *argv[]) {
   //std::cout << "Save original histogram: " << argv[5] << std::endl; // (boolean) binary value 
 
 
-  double termination_resN = atoi(argv[1]);
-  double termination_resS = atoi(argv[2]);
-  double north_gain = atoi(argv[3]);
-  double south_gain = atoi(argv[4]);
+  double termination_resN = atof(argv[1]);
+  double termination_resS = atof(argv[2]);
+  double north_gain = atof(argv[3]);
+  double south_gain = atof(argv[4]);
 
 
 // graphing the histogram(s)
