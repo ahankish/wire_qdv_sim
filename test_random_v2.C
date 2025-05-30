@@ -10,6 +10,7 @@
 
 #include <string>
 #include <TFile.h>
+#include <cmath>
 
 // constants that do NOT change from wire-to-wire
 
@@ -45,6 +46,7 @@ void make_histo_pretty_qdvpos(TH1D* h){
   h->Draw();
 }
 
+
 // main function - grabbing command line arguments 
 int main(int argc, char *argv[]) {
 
@@ -56,7 +58,6 @@ int main(int argc, char *argv[]) {
   // arg[5] is a parameter that tells the program whether or not to save the 
   // histogram with no adjustments to the parameters to the file 
   //std::cout << "Save original histogram: " << argv[5] << std::endl; // (boolean) binary value 
-
 
   double termination_resN = atof(argv[1]);
   double termination_resS = atof(argv[2]);
@@ -171,6 +172,20 @@ int main(int argc, char *argv[]) {
   std::string gainN_str(argv[3]);
   std::string gainS_str(argv[4]);
 
+  if (abs(atof(argv[1])) < 1 && atof(argv[1]) != 0) { 
+    term_resN_str = "0" + term_resN_str; // adding a "0" to the string: eg. ".1" -> "0.1"
+  }
+  if (abs(atof(argv[2])) < 1 && atof(argv[2]) != 0) { 
+    term_resS_str = "0" + term_resS_str; // adding a "0" to the string: eg. ".1" -> "0.1"
+  }
+  if (abs(atof(argv[3])) < 1 && atof(argv[3]) != 0) { 
+    gainN_str = "0" + gainN_str; // adding a "0" to the string: eg. ".1" -> "0.1"
+  }
+  if (abs(atof(argv[4])) < 1 && atof(argv[4]) != 0) { 
+    gainS_str = "0" + gainS_str; // adding a "0" to the string: eg. ".1" -> "0.1"
+  }
+
+
   std::string underscore = "_";
   std::string root_str = ".root";
   //std::string original = "_original";
@@ -196,6 +211,7 @@ int main(int argc, char *argv[]) {
   //h_true_pos->Write(); // may remove for the above conditional
   h_calcqdv->Write();
 
+  std::cout << "Filename: " << file_name_c << std::endl;
   std::cout << "Histograms saved!" << std::endl;
 
   //myFile->WriteObject(&c, "c");
