@@ -1,6 +1,6 @@
 # wire_qdv_sim
 
-<span style="color:red"> **Wire Charge Division Simulation** </span>
+## <span style="color:red"> **Wire Charge Division Simulation** </span>
 
 This repository contains files and scripts to test different possible parameters
 for a single wire in drift chamber tracker. The main goal is to use these samples 
@@ -39,15 +39,19 @@ Command for compiling and executing the code for testing a single wire:
 # compile the file 
 g++ -o test_random_v2 test_random_v2.C $( root-config --libs --cflags )
 # running the file with example numbers for termination resistance and gain factors
+# generates 2 histograms and saves them to a file of the name wire_10.0_10.0_1.0_1.0.root
 ./test_random_v2 10 10 1 1 
 ```
 
 ### <span style="color:yellow"> *Storage File Format:* </span> 
 
-**Filename:** ```termN_termS_gainN_gainS.root```
+**Filename:** ```wire_termN_termS_gainN_gainS.root```
  with each parameter being a numerical value
 
-eg. ```0_0_0_0.root``` is the filename for the model with 
+Note: Histograms are stored in a folder called ```wiresim_files/``` that will be 
+generated if it is not in your cwd already
+
+eg. ```wire_0_0_0_0.root``` is the filename for the model with 
 
 - North Termination Resistance = 0
 - South Termination Resistance = 0 
@@ -56,10 +60,11 @@ eg. ```0_0_0_0.root``` is the filename for the model with
 
 Each file stores **2 histograms:**
 
-- *"True Position"* histogram: 
-  - histogram of the wire with each parameter set to 0
 - *"Charge Division"* histogram: 
+  - histogram of the wire with each parameter set to 0
+- *"Charge Division calculated"* histogram: 
   - histogram of the wire with the adjusted parameters (model)
+
 
 ## <span style="color:orange"> Bash Scripts: </span> 
 
@@ -71,10 +76,11 @@ Running the test file for a hard-coded set of parameters (16 files created total
   - South Gain Factor = 1, 2
 
 How to run: 
+
 ```./test_wire.sh ```
 
-Running the test file with several test values (within a predetermined range) - nested for-loops
 
+Running the test file with several test values (within a predetermined range) - nested for-loops
 
 How to run: 
 - Input parameters - iterate from [0, a]: 
@@ -82,8 +88,10 @@ How to run:
   - South Termination Resistance Range
   - North Gain Factor Range 
   - South Gain Factor Range
+  - Step Value (default is 1.0)
 
-Example: Each range is for values 0-1 (16 files created total)
-```./test_wire_multiparam.sh 1 1 1 1```
+Example: Each parameter range is for values 0-1 with a 0.5 step (32 files created total) 
+
+```./test_wire_multiparam.sh 1 1 1 1 0.5```
 
 

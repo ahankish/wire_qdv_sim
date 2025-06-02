@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# if the directory to store files is not already created, this script will create one 
+mkdir wiresim_files
+echo $? # if the exit status is 1, then either the directory exists, or there's problems 
+
+
 # changing the wire parameters 
 echo "Termination Resistance (N) Range: $1"
 echo "Termination Resistance (S) Range: $2"
@@ -11,7 +16,7 @@ STEP=$5
 
 # checking if a value for STEP was input in the command line 
 if [ -z "$STEP" ]; 
-then [ STEP = 0.1 ]; # default STEP value 
+then [ STEP = 1.0 ]; # default STEP value 
 fi
 
 # d1d2=$(echo "$d1 + $d2" | bc)
@@ -21,8 +26,8 @@ tmp1=1
 tmp2=1
 tmp3=1
 
-# compiling the file ???
-g++ -o test_random_v2 test_random_v2.C $( root-config --libs --cflags )
+# compiling the file (is this necessary??)
+g++ -o test_random_v3 test_random_v3.C $( root-config --libs --cflags )
 
 #[ bc scale=2 n<=$1 ]
 # input values go into the test and a root file is created with that name
@@ -65,7 +70,7 @@ do
           continue
         fi
 
-        ./test_random_v2 $n $i $j $k  
+        ./test_random_v3 $n $i $j $k  
         k=$( echo " scale = 2; $k + $STEP " | bc )
 
       done
