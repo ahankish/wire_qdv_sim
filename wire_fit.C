@@ -41,16 +41,16 @@ int main(int argc, char *argv[]){
   // https://root.cern/manual/fitting/
 
   // linear fit: 
-  double linfit(double *x,double *par) {
-    double arg = 0;
-    if (par[2]!=0) arg = (x[0] - par[1])/par[2];
-    double fitval = par[0]*TMath::Exp(-0.5*arg*arg);
+  double linfit(double* x) {
+    double intercept=0; slope=1;
+    double* fitval = slope*x + intercept;
     return fitval;
   }
 
   // "Create a TF1 object using the fitf function. The last three parameters
   // specify the range and the number of parameters for the function."
-  TF1 *func = new TF1("fit",linfit,-3,3,3);
+  int entries = proj1->GetEntries(); // number of entries in the original histogram
+  TF1 *func = new TF1("fit",linfit,-200,200); // no parameters in this example 
 
   // fitting the histogram: 
 
@@ -61,12 +61,12 @@ int main(int argc, char *argv[]){
   func->SetParNames("Constant","Mean_value","Sigma");
 
   // "Call TH1::Fit with the name of the TF1 object."
-  proj1->Fit("fit");
+  TH1D* lin_hist = proj1->Fit("fit"); 
 
   // drawing the fitted histogram
-  proj1->Draw();
+  lin_hist->Draw();
 
-
+  /*
   // periodic fit: 
   double perfit(double *x,double *par) {
     // func 
@@ -86,9 +86,22 @@ int main(int argc, char *argv[]){
   func->SetParNames("Constant","Mean_value","Sigma");
 
   // "Call TH1::Fit with the name of the TF1 object."
-  proj1->Fit("fit");
+  TH1D* per_hist = proj1->Fit("fit");
 
   // drawing the fitted histogram
-  proj1->Draw();
+  per_hist->Draw();
+  */
+
+  
+  // Step 3: Saving the histograms to a file 
+
+  /*
+  std::string path = "path/to/file";
+  const char* cpath = path.c_str(); // converting the file path and name to a c-string
+
+  std::unique_ptr<TFile> myFile( TFile::Open(cpath, "RECREATE") ); // rewriting/creating the file to save to
+
+  per_hist->Write(); // writing the histogram to the file 
+  */
 
 }
