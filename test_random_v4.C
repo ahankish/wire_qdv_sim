@@ -66,8 +66,21 @@ int main(int argc, char *argv[]) {
 
   double termination_resN = atof(argv[1]);
   double termination_resS = atof(argv[2]);
-  double north_gain = atof(argv[3]);
-  double south_gain = atof(argv[4]);
+  double north_gain, south_gain;
+  north_gain = atof(argv[3]);
+  south_gain = atof(argv[4]);
+
+  if (atof(argv[3]) == 0) {
+    std::cout << "Gain (N) cannot be negative. " << std::endl;
+    std::cout << "Gain (N) automatically set to 1 " << std::endl;
+    north_gain = 1;
+  }
+
+  if (atof(argv[4]) == 0) {
+    std::cout << "Gain (S) cannot be negative. " << std::endl;
+    std::cout << "Gain (S) automatically set to 1 " << std::endl;
+    south_gain = 1;
+  }
 
 
 //======================================================================================================================
@@ -100,18 +113,18 @@ int main(int argc, char *argv[]) {
   gSystem->ProcessEvents(); // for getting the graphics to display
 
 
-  TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
-  cDCTdist->SetLeftMargin(0.15);
-  cDCTdist->SetRightMargin(0.04);
-  cDCTdist->SetTopMargin(0.04);
+  //TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
+  //cDCTdist->SetLeftMargin(0.15);
+  //cDCTdist->SetRightMargin(0.04);
+  //cDCTdist->SetTopMargin(0.04);
   
   TCanvas* cDCTproj = new TCanvas("cDCTproj", "X Projection - 1D Histogram");
   cDCTproj->SetLeftMargin(0.15);
   cDCTproj->SetRightMargin(0.04);
   cDCTproj->SetTopMargin(0.04);
 
-  cDCTdist->cd();
-  proj0->Draw();
+  //cDCTdist->cd();
+  //proj0->Draw();
   cDCTproj->cd();
   proj1->Draw(); // testing to see if we have the right histogram 
 
@@ -121,7 +134,7 @@ int main(int argc, char *argv[]) {
 
 
 // graphing the histogram(s)
-  int num_entries=100000;
+  int num_entries=1000000;
   gROOT->Reset();
   TStyle * plain = new TStyle("plain","plain");
   plain->SetCanvasBorderMode(0);
@@ -148,9 +161,11 @@ int main(int argc, char *argv[]) {
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
-    qdv_true = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
+    
+    //qdv_true = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
 
-    // scaling the wire distribution
+    qdv_true = (proj1->GetRandom() + 238.0) / 476.0; // scaling the wire distribution
+
 
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
@@ -198,7 +213,7 @@ int main(int argc, char *argv[]) {
   h->Fit(FitFuncCombined,"0","");
   //display what we did
 */
-  TCanvas * c = new TCanvas("c_ref","c_title", 200,10,600,600);
+  TCanvas * c = new TCanvas("c_ref","Calculated Wire Charge Distribution", 200,10,600,600);
   c->SetLeftMargin(0.15);
   c->SetRightMargin(0.04);
   c->SetTopMargin(0.04);
@@ -215,7 +230,7 @@ int main(int argc, char *argv[]) {
   h_div->Draw("SAME");
   // c->SaveAs("GainRatio_resistance_model.png"); // SAVING THE HISTOGRAM AS A PNG 
 
-  TCanvas * c2 = new TCanvas("c_ref2","c_title2", 200,50,600,600);
+  TCanvas * c2 = new TCanvas("c_ref2","Original Wire Charge Distribution", 200,50,600,600);
   c2->SetLeftMargin(0.15);
   c2->SetRightMargin(0.04);
   c2->SetTopMargin(0.04);
