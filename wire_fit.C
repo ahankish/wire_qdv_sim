@@ -169,9 +169,9 @@ int main(int argc, char *argv[]){
   TCanvas* transfCanvas = new TCanvas("transfCanvas", "Transformed Projection");
   transfCanvas->cd();
   transform->Draw();
-  TH1* transform2 = (TH1 *)transform->FFT(transform2, "RE");
+  //TH1* transform2 = (TH1 *)transform->FFT(transform2, "RE");
   //transfCanvas->cd(2);
-  transform2->Draw();
+  //transform2->Draw();
 
   //TH1* transform2 = (TH1 *)proj1->FFT(transform2, "R2C");
 

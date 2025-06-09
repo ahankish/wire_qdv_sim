@@ -11,6 +11,11 @@
 #include <string>
 #include <TFile.h>
 #include <cmath>
+#include <TH2D.h>
+#include <TApplication.h>
+#include <TMarker.h>
+#include <TSystem.h> 
+//#include <TVirtualFFT.h>
 
 // constants that do NOT change from wire-to-wire
 
@@ -56,13 +61,63 @@ int main(int argc, char *argv[]) {
   std::cout << "termination resistance S: " << argv[2] << std::endl;
   std::cout << "gain N: " << argv[3] << std::endl;
   std::cout << "gain S: " << argv[4] << std::endl;
-  std::cout << "Position [x, y]: " << argv[5] << std::endl; // for the acptsim_merged_excl2.root file
+  //std::cout << "Position [x, y]: " << argv[5] << std::endl; // for the acptsim_merged_excl2.root file
 
 
   double termination_resN = atof(argv[1]);
   double termination_resS = atof(argv[2]);
   double north_gain = atof(argv[3]);
   double south_gain = atof(argv[4]);
+
+
+//======================================================================================================================
+
+  std::cout << "File Name: " << argv[5] << std::endl;
+  std::cout << "Wire Position: " << argv[6] << std::endl;
+
+  std::string filename(argv[5]);
+  int wire_zpos = atoi(argv[6]); // integer for now, can change to float if necessary with atof()
+
+  // Step 1: Normalize the histogram of the wire with this postion
+
+  std::unique_ptr<TFile> wireFile( TFile::Open(filename.c_str()) ); // opening the input file 
+
+  if (!wireFile || wireFile->IsZombie()) { // checking if the file opened properly
+   std::cerr << "Error opening file " << filename << std::endl;
+   exit(-1);
+  }
+
+
+  // getting the histogram of the wire we need to fit:
+  std::unique_ptr<TH2D> proj0(wireFile->Get<TH2D>("hposXZDCT")); // 2D histogram 
+
+
+  TH1D* proj1 = proj0->ProjectionX("test1", wire_zpos, wire_zpos); // 1D histogram of hit pos. likelihood based on z pos.
+
+  //std::unique_ptr<TH1D> proj1(wireFile->Get<TH1D>(proj0->ProjectionX("test1", wire_zpos, wire_zpos)));
+  
+  TApplication *app = new TApplication("app", 0, 0);
+  gSystem->ProcessEvents(); // for getting the graphics to display
+
+
+  TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
+  cDCTdist->SetLeftMargin(0.15);
+  cDCTdist->SetRightMargin(0.04);
+  cDCTdist->SetTopMargin(0.04);
+  
+  TCanvas* cDCTproj = new TCanvas("cDCTproj", "X Projection - 1D Histogram");
+  cDCTproj->SetLeftMargin(0.15);
+  cDCTproj->SetRightMargin(0.04);
+  cDCTproj->SetTopMargin(0.04);
+
+  cDCTdist->cd();
+  proj0->Draw();
+  cDCTproj->cd();
+  proj1->Draw(); // testing to see if we have the right histogram 
+
+  //app->Run(); // running the graphics using TApplication
+
+//======================================================================================================================
 
 
 // graphing the histogram(s)
@@ -93,7 +148,10 @@ int main(int argc, char *argv[]) {
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
-    qdv_true = gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
+    qdv_true = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
+
+    // scaling the wire distribution
+
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
     //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
@@ -162,6 +220,8 @@ int main(int argc, char *argv[]) {
   c2->SetRightMargin(0.04);
   c2->SetTopMargin(0.04);
   make_histo_pretty_qdvpos(h_true_pos);
+
+  app->Run(); // running all graphics using TApplication
 
 
   // saving the histogram: 
