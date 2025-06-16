@@ -88,6 +88,7 @@ int main(int argc, char *argv[]) {
   std::cout << "File Name: " << argv[5] << std::endl;
   std::cout << "Wire Position: " << argv[6] << std::endl;
 
+
   std::string filename(argv[5]);
   int wire_zpos = atoi(argv[6]); // integer for now, can change to float if necessary with atof()
 
@@ -106,6 +107,13 @@ int main(int argc, char *argv[]) {
 
 
   TH1D* proj1 = proj0->ProjectionX("test1", wire_zpos, wire_zpos); // 1D histogram of hit pos. likelihood based on z pos.
+  
+  // for scaling relation
+  //double min_bin = proj1->FindFirstBinAbove(0);
+  //double min_val = proj1->GetBinContent(min_bin);
+  double min_val = proj1->GetBinCenter(proj1->FindFirstBinAbove(0));
+  //std::cout << "First bin above 0 = " << min_bin << std::endl; // for debugging
+  //std::cout << "Minimum x value = " << min_val << std::endl;
 
   //std::unique_ptr<TH1D> proj1(wireFile->Get<TH1D>(proj0->ProjectionX("test1", wire_zpos, wire_zpos)));
   
@@ -150,9 +158,9 @@ int main(int argc, char *argv[]) {
   // min and max chargediv can be used to first sample for fraction
   TH1D * h_div = new TH1D("Charge Division", "", 200,-0.05,1.05);  
   //create histogram for true position
-  TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0);
+  TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0); //*********** */
   TH1D * h_calcqdv = new TH1D("Charge Division calculated", "", 200,-0.05,1.05);  
-  TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  
+  TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  //****************** */
 
   //disable display of histogram statistics
   h_div->SetStats(false);
@@ -164,8 +172,8 @@ int main(int argc, char *argv[]) {
     
     //qdv_true = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
 
-    qdv_true = (proj1->GetRandom() + 238.0) / 476.0; // scaling the wire distribution
-
+    // scaling the wire distribution
+    qdv_true = (proj1->GetRandom() - min_val) / ((-min_val) - min_val);
 
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
@@ -187,7 +195,8 @@ int main(int argc, char *argv[]) {
     
     //double qdv_new=total_resS/(total_resS+(Gain_ratio2*total_resN));
     
-    double qdv_new=(north_gain/south_gain)*total_resN/(total_resS+(north_gain*total_resN/south_gain));
+    //double qdv_new=(north_gain/south_gain)*total_resN/(total_resS+(north_gain*total_resN/south_gain));
+    double qdv_new=(north_gain/total_resN)/((north_gain/total_resN)+ (south_gain/total_resS));
 
     h_calcqdv->Fill(qdv_new);
     //qdv_new=res_south/(res_south+(Gain_ratio2*res_north));
@@ -235,6 +244,24 @@ int main(int argc, char *argv[]) {
   c2->SetRightMargin(0.04);
   c2->SetTopMargin(0.04);
   make_histo_pretty_qdvpos(h_true_pos);
+
+  /*
+  TCanvas * cTruePos = new TCanvas("c_truepos_ref","True Position", 200,10,600,600);
+  cTruePos->SetLeftMargin(0.15);
+  cTruePos->SetRightMargin(0.04);
+  cTruePos->SetTopMargin(0.04);
+  cTruePos->cd();
+  h_true_pos->Draw();
+
+  TCanvas * ccalcqdv2 = new TCanvas("c_calcqdv2_ref","Calc QDV 2", 200,10,600,600);
+  ccalcqdv2->SetLeftMargin(0.15);
+  ccalcqdv2->SetRightMargin(0.04);
+  ccalcqdv2->SetTopMargin(0.04);
+  ccalcqdv2->cd();
+  //h_calcqdv2->Draw();
+
+  */
+
 
   app->Run(); // running all graphics using TApplication
 
