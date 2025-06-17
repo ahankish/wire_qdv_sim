@@ -117,8 +117,8 @@ int main(int argc, char *argv[]) {
 
   //std::unique_ptr<TH1D> proj1(wireFile->Get<TH1D>(proj0->ProjectionX("test1", wire_zpos, wire_zpos)));
   
-  TApplication *app = new TApplication("app", 0, 0);
-  gSystem->ProcessEvents(); // for getting the graphics to display
+  //TApplication *app = new TApplication("app", 0, 0);
+  //gSystem->ProcessEvents(); // for getting the graphics to display
 
 
   //TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
   //create histogram for true position
   TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0); //*********** */
   TH1D * h_calcqdv = new TH1D("Charge Division calculated", "", 200,-0.05,1.05);  
-  TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  //****************** */
+  //TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  //****************** */
 
   //disable display of histogram statistics
   h_div->SetStats(false);
@@ -263,7 +263,7 @@ int main(int argc, char *argv[]) {
   */
 
 
-  app->Run(); // running all graphics using TApplication
+  //app->Run(); // running all graphics using TApplication
 
 
   // saving the histogram: 
@@ -278,7 +278,7 @@ int main(int argc, char *argv[]) {
   std::string underscore = "_";
   std::string root_str = ".root";
   std::string prefix = "wire_";
-  std::string folder = "wiresim_files/";
+  std::string folder = "wiresim_files" + std::string(argv[6]) + "/";
   //std::string original = "_original";
 
   std::string path = folder + prefix + term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + root_str;

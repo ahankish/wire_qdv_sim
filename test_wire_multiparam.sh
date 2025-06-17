@@ -27,7 +27,7 @@ tmp2=1
 tmp3=1
 
 # compiling the file (is this necessary??)
-g++ -o test_random_v3 test_random_v3.C $( root-config --libs --cflags )
+g++ -o test_random_v3 test_random_v4.C $( root-config --libs --cflags )
 
 #[ bc scale=2 n<=$1 ]
 # input values go into the test and a root file is created with that name
@@ -70,7 +70,7 @@ do
           continue
         fi
 
-        ./test_random_v3 $n $i $j $k  
+        ./test_random_v4 $n $i $j $k  
         k=$( echo " scale = 2; $k + $STEP " | bc )
 
       done

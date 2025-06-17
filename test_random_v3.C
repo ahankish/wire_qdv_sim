@@ -11,6 +11,11 @@
 #include <string>
 #include <TFile.h>
 #include <cmath>
+#include <TH2D.h>
+#include <TApplication.h>
+#include <TMarker.h>
+#include <TSystem.h> 
+//#include <TVirtualFFT.h>
 
 // constants that do NOT change from wire-to-wire
 
@@ -56,19 +61,88 @@ int main(int argc, char *argv[]) {
   std::cout << "termination resistance S: " << argv[2] << std::endl;
   std::cout << "gain N: " << argv[3] << std::endl;
   std::cout << "gain S: " << argv[4] << std::endl;
+  //std::cout << "Position [x, y]: " << argv[5] << std::endl; // for the acptsim_merged_excl2.root file
 
-  // arg[5] is a parameter that tells the program whether or not to save the 
-  // histogram with no adjustments to the parameters to the file 
-  //std::cout << "Save original histogram: " << argv[5] << std::endl; // (boolean) binary value 
 
   double termination_resN = atof(argv[1]);
   double termination_resS = atof(argv[2]);
-  double north_gain = atof(argv[3]);
-  double south_gain = atof(argv[4]);
+  double north_gain, south_gain;
+  north_gain = atof(argv[3]);
+  south_gain = atof(argv[4]);
+
+  if (atof(argv[3]) == 0) {
+    std::cout << "Gain (N) cannot be negative. " << std::endl;
+    std::cout << "Gain (N) automatically set to 1 " << std::endl;
+    north_gain = 1;
+  }
+
+  if (atof(argv[4]) == 0) {
+    std::cout << "Gain (S) cannot be negative. " << std::endl;
+    std::cout << "Gain (S) automatically set to 1 " << std::endl;
+    south_gain = 1;
+  }
+
+
+//======================================================================================================================
+
+  std::cout << "File Name: " << argv[5] << std::endl;
+  std::cout << "Wire Position: " << argv[6] << std::endl;
+
+
+  std::string filename(argv[5]);
+  int wire_zpos = atoi(argv[6]); // integer for now, can change to float if necessary with atof()
+
+  // Step 1: Normalize the histogram of the wire with this postion
+
+  std::unique_ptr<TFile> wireFile( TFile::Open(filename.c_str()) ); // opening the input file 
+
+  if (!wireFile || wireFile->IsZombie()) { // checking if the file opened properly
+   std::cerr << "Error opening file " << filename << std::endl;
+   exit(-1);
+  }
+
+
+  // getting the histogram of the wire we need to fit:
+  std::unique_ptr<TH2D> proj0(wireFile->Get<TH2D>("hposXZDCT")); // 2D histogram 
+
+
+  TH1D* proj1 = proj0->ProjectionX("test1", wire_zpos, wire_zpos); // 1D histogram of hit pos. likelihood based on z pos.
+  
+  // for scaling relation
+  //double min_bin = proj1->FindFirstBinAbove(0);
+  //double min_val = proj1->GetBinContent(min_bin);
+  double min_val = proj1->GetBinCenter(proj1->FindFirstBinAbove(0));
+  //std::cout << "First bin above 0 = " << min_bin << std::endl; // for debugging
+  //std::cout << "Minimum x value = " << min_val << std::endl;
+
+  //std::unique_ptr<TH1D> proj1(wireFile->Get<TH1D>(proj0->ProjectionX("test1", wire_zpos, wire_zpos)));
+  
+  TApplication *app = new TApplication("app", 0, 0);
+  gSystem->ProcessEvents(); // for getting the graphics to display
+
+
+  //TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
+  //cDCTdist->SetLeftMargin(0.15);
+  //cDCTdist->SetRightMargin(0.04);
+  //cDCTdist->SetTopMargin(0.04);
+  
+  TCanvas* cDCTproj = new TCanvas("cDCTproj", "X Projection - 1D Histogram");
+  cDCTproj->SetLeftMargin(0.15);
+  cDCTproj->SetRightMargin(0.04);
+  cDCTproj->SetTopMargin(0.04);
+
+  //cDCTdist->cd();
+  //proj0->Draw();
+  cDCTproj->cd();
+  proj1->Draw(); // testing to see if we have the right histogram 
+
+  //app->Run(); // running the graphics using TApplication
+
+//======================================================================================================================
 
 
 // graphing the histogram(s)
-  int num_entries=100000;
+  int num_entries=1000000;
   gROOT->Reset();
   TStyle * plain = new TStyle("plain","plain");
   plain->SetCanvasBorderMode(0);
@@ -84,9 +158,9 @@ int main(int argc, char *argv[]) {
   // min and max chargediv can be used to first sample for fraction
   TH1D * h_div = new TH1D("Charge Division", "", 200,-0.05,1.05);  
   //create histogram for true position
-  TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0);
+  TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0); //*********** */
   TH1D * h_calcqdv = new TH1D("Charge Division calculated", "", 200,-0.05,1.05);  
-  TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  
+  TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  //****************** */
 
   //disable display of histogram statistics
   h_div->SetStats(false);
@@ -95,7 +169,12 @@ int main(int argc, char *argv[]) {
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
     double qdv_true; 
-    qdv_true = gRandom->Uniform(0,1); // CHANGED FROM GAUSS TO UNIFORM
+    
+    //qdv_true = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
+
+    // scaling the wire distribution
+    qdv_true = (proj1->GetRandom() - min_val) / ((-min_val) - min_val);
+
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
     //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
@@ -116,7 +195,8 @@ int main(int argc, char *argv[]) {
     
     //double qdv_new=total_resS/(total_resS+(Gain_ratio2*total_resN));
     
-    double qdv_new=(north_gain/south_gain)*total_resN/(total_resS+(north_gain*total_resN/south_gain));
+    //double qdv_new=(north_gain/south_gain)*total_resN/(total_resS+(north_gain*total_resN/south_gain));
+    double qdv_new=(north_gain/total_resN)/((north_gain/total_resN)+ (south_gain/total_resS));
 
     h_calcqdv->Fill(qdv_new);
     //qdv_new=res_south/(res_south+(Gain_ratio2*res_north));
@@ -142,7 +222,7 @@ int main(int argc, char *argv[]) {
   h->Fit(FitFuncCombined,"0","");
   //display what we did
 */
-  TCanvas * c = new TCanvas("c_ref","c_title", 200,10,600,600);
+  TCanvas * c = new TCanvas("c_ref","Calculated Wire Charge Distribution", 200,10,600,600);
   c->SetLeftMargin(0.15);
   c->SetRightMargin(0.04);
   c->SetTopMargin(0.04);
@@ -159,11 +239,26 @@ int main(int argc, char *argv[]) {
   h_div->Draw("SAME");
   // c->SaveAs("GainRatio_resistance_model.png"); // SAVING THE HISTOGRAM AS A PNG 
 
-  TCanvas * c2 = new TCanvas("c_ref2","c_title2", 200,50,600,600);
+  TCanvas * c2 = new TCanvas("c_ref2","Original Wire Charge Distribution", 200,50,600,600);
   c2->SetLeftMargin(0.15);
   c2->SetRightMargin(0.04);
   c2->SetTopMargin(0.04);
   make_histo_pretty_qdvpos(h_true_pos);
+
+  TCanvas * pdfCanvas = new TCanvas("Comparison","Wire Charge Distribution Comparison", 200,50,600,600);
+  pdfCanvas->SetLeftMargin(0.15);
+  pdfCanvas->SetRightMargin(0.04);
+  pdfCanvas->SetTopMargin(0.04);
+  pdfCanvas->Divide(4, 3); // diving the canvas up to display mutiple histograms
+
+  pdfCanvas->cd(1);
+  h_div->Draw(); // no changes 
+
+  pdfCanvas->cd(2);
+  
+
+
+  app->Run(); // running all graphics using TApplication
 
 
   // saving the histogram: 
