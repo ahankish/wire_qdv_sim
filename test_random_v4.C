@@ -57,10 +57,11 @@ int main(int argc, char *argv[]) {
 
   TDirectory::AddDirectory(kFALSE); // setting directory to 0 for all histograms 
 
-  std::cout << "termination resistance N: " << argv[1] << std::endl;
-  std::cout << "termination resistance S: " << argv[2] << std::endl;
-  std::cout << "gain N: " << argv[3] << std::endl;
-  std::cout << "gain S: " << argv[4] << std::endl;
+  //std::cout << "termination resistance N: " << argv[1] << std::endl;
+  //std::cout << "termination resistance S: " << argv[2] << std::endl;
+  //std::cout << "gain N: " << argv[3] << std::endl;
+  //std::cout << "gain S: " << argv[4] << std::endl;
+  
   //std::cout << "Position [x, y]: " << argv[5] << std::endl; // for the acptsim_merged_excl2.root file
 
 
@@ -70,17 +71,19 @@ int main(int argc, char *argv[]) {
   north_gain = atof(argv[3]);
   south_gain = atof(argv[4]);
 
-  if (atof(argv[3]) == 0) {
+  if ((atof(argv[3]) == 0) || (atof(argv[4]) == 0)) {
     std::cout << "Gain (N) cannot be negative. " << std::endl;
     std::cout << "Gain (N) automatically set to 1 " << std::endl;
     north_gain = 1;
   }
 
+  /*
   if (atof(argv[4]) == 0) {
     std::cout << "Gain (S) cannot be negative. " << std::endl;
     std::cout << "Gain (S) automatically set to 1 " << std::endl;
     south_gain = 1;
   }
+  */
 
 
 //======================================================================================================================
@@ -117,8 +120,8 @@ int main(int argc, char *argv[]) {
 
   //std::unique_ptr<TH1D> proj1(wireFile->Get<TH1D>(proj0->ProjectionX("test1", wire_zpos, wire_zpos)));
   
-  //TApplication *app = new TApplication("app", 0, 0);
-  //gSystem->ProcessEvents(); // for getting the graphics to display
+  TApplication *app = new TApplication("app", 0, 0);
+  gSystem->ProcessEvents(); // for getting the graphics to display
 
 
   //TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
@@ -130,6 +133,19 @@ int main(int argc, char *argv[]) {
   cDCTproj->SetLeftMargin(0.15);
   cDCTproj->SetRightMargin(0.04);
   cDCTproj->SetTopMargin(0.04);
+
+  /*
+  // rebin the projection for the K-S test
+  TH1* reBinnedProj = proj1->Rebin(5, "Rebinned projection");
+
+  // Fix the bin edges for the K-S test
+  TAxis* xaxis = proj1->GetXaxis();
+  int lowedge = xaxis->GetBinLowEdge(0);
+  std::cout << "Bin Low Edge = " << lowedge << std::endl;
+  int upedge = xaxis->GetBinUpEdge(199);
+  std::cout << "Bin Up Edge = " << upedge << std::endl;
+
+  */
 
   //cDCTdist->cd();
   //proj0->Draw();
@@ -157,6 +173,7 @@ int main(int argc, char *argv[]) {
 
   // min and max chargediv can be used to first sample for fraction
   TH1D * h_div = new TH1D("Charge Division", "", 200,-0.05,1.05);  
+  TH1D * h_divKS = new TH1D("Charge Div KS", "", 1000,-270,270);  
   //create histogram for true position
   TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0); //*********** */
   TH1D * h_calcqdv = new TH1D("Charge Division calculated", "", 200,-0.05,1.05);  
@@ -168,11 +185,11 @@ int main(int argc, char *argv[]) {
   h_true_pos->SetStats(false);
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
-    double qdv_true; 
+    double qdv_true, qdv_trueKS; 
     
-    //qdv_true = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
+    qdv_trueKS = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
 
-    // scaling the wire distribution
+    // scaling the wire distribution to [0,1]
     qdv_true = (proj1->GetRandom() - min_val) / ((-min_val) - min_val);
 
 
@@ -181,6 +198,8 @@ int main(int argc, char *argv[]) {
     //else qdv_true=gRandom->Gaus(0.5,0.1);  // CHANGE FROM GAUSS DISTRIBUTION TO A UNIFORM RANDOM DISTRIBUTION *************
     //double qdv_true =gRandom->Gaus(0.5,0.1);
     h_div->Fill(qdv_true);
+    h_divKS->Fill(qdv_trueKS);
+
     double qdv_true_pos= convert_qdv_to_pos(qdv_true);
     h_true_pos->Fill(qdv_true_pos);
     //h_true_pos->Fill(gRandom->Uniform(-1.0*DCT_wire_length/2.0,DCT_wire_length/2.0));
@@ -204,6 +223,24 @@ int main(int argc, char *argv[]) {
     // now we can calculate the 
     //h_true_pos->Fill(gRandom->Uniform(-1.0*DCT_wire_length/2.0,DCT_wire_length/2.0));
   }
+
+  /*
+  TAxis* xaxis2 = h_divKS->GetXaxis();
+  int lowedge2 = xaxis2->GetBinLowEdge(0);
+  std::cout << "Bin Low Edge 2 = " << lowedge2 << std::endl;
+  int upedge2 = xaxis2->GetBinUpEdge(199);
+  std::cout << "Bin Up Edge 2 = " << upedge2 << std::endl;
+  std::cout << "Bin Width = " << h_divKS->GetBinWidth(199) << std::endl;
+
+  */
+  // Check if the histograms are from the same distribution using Kolmogorov-Smirnov test 
+  //double test = h_div->KolmogorovTest(reBinnedProj);
+  double test = h_divKS->KolmogorovTest(proj1);
+
+  std::cout << "Kolmogorov-Smirnov Test Result: " << test << std::endl;
+  //std::cout << "nbins h_div: " << h_divKS->GetNbinsX() << std::endl;
+  //std::cout << "nbins proj1: " << proj1->GetNbinsX() << std::endl;
+
   // now apply a voltage to this
 
 
@@ -222,6 +259,7 @@ int main(int argc, char *argv[]) {
   h->Fit(FitFuncCombined,"0","");
   //display what we did
 */
+  
   TCanvas * c = new TCanvas("c_ref","Calculated Wire Charge Distribution", 200,10,600,600);
   c->SetLeftMargin(0.15);
   c->SetRightMargin(0.04);
@@ -263,7 +301,7 @@ int main(int argc, char *argv[]) {
   */
 
 
-  //app->Run(); // running all graphics using TApplication
+  app->Run(); // running all graphics using TApplication
 
 
   // saving the histogram: 
