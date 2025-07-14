@@ -17,7 +17,7 @@
 #include "TError.h"
 #include <iostream>
 
-
+/*
 double qdv_func(int *ndims, double *params) {
   // takes in the parameters of one model and returns the KS test value for that model
   int termResN_dims = ndims[0]; 
@@ -26,8 +26,29 @@ double qdv_func(int *ndims, double *params) {
 
   return params[termResN_dims][termResS_dims][gainRatio_dims];
 }
+  */
 
-int NumericalMinimization(const char * minName = "Minuit2",
+
+// sample array of KS test values
+double* params; // to be filled by the model comparisons
+
+double qdv_func2(const double* ndims) {
+  // takes in the parameters of one model and returns the KS test value for that model
+
+
+  // use the test test_wire_multiparam.sh script to generate the files of models 
+  // there should be files in the directory wiresim_files<wire location> directory
+  // lookup the directory of models for that wire and grab the model histograms 
+
+
+  int termResN_dims = ndims[0];
+  int termResS_dims = ndims[1];
+  int gainRatio_dims = ndims[2];
+
+  return params[termResN_dims][termResS_dims][gainRatio_dims];
+}
+
+int qdv_minimize(const char * minName = "Minuit2",
                           const char *algoName = "" ,
                           int randomSeed = -1)
 {
@@ -54,16 +75,16 @@ int NumericalMinimization(const char * minName = "Minuit2",
 
    // create funciton wrapper for minmizer
    // a IMultiGenFunction type
-   ROOT::Math::Functor f(&qdv_func);
-   double step[3] = {0.5,0.5,0.001};
+   ROOT::Math::Functor f(&qdv_func2, 3);
+   double step[3] = { 1,1,1 };
    // starting point
 
-   double variable[3] = { 1.,1.2,1.5 };
+   double variable[3] = { 0,0,0 };
    if (randomSeed >= 0) {
       TRandom2 r(randomSeed);
-      variable[0] = r.Uniform(10.,20.);
-      variable[1] = r.Uniform(10.,20.);
-      variable[2] = r.Uniform(1.,2.);
+      variable[0] = r.Uniform(0,1);
+      variable[1] = r.Uniform(0,1);
+      variable[2] = r.Uniform(0,1);
    }
 
    min->SetFunction(f);

@@ -1,25 +1,31 @@
 #!/bin/bash
 
 # if the directory to store files is not already created, this script will create one 
-mkdir wiresim_files
+mkdir wiresim_files$7
 echo $? # if the exit status is 1, then either the directory exists, or there's problems 
 
 
 # changing the wire parameters 
-echo "Termination Resistance (N) Range: $1"
-echo "Termination Resistance (S) Range: $2"
-echo "Gain Factor (N) Range: $3"
-echo "Gain Factor (S) Range: $4"
-echo "Step Value: $5"
+#echo "Termination Resistance (N) Top Limit: $1"
+#echo "Termination Resistance (S) Top Limit: $2"
+#echo "Gain Factor (N) Top Limit: $3"
+#echo "Gain Factor (S) Top Limit: $4"
+#echo "Step Value Resistances: $5"
+#echo "Step Value Gain: $6"
+#echo "Wire Location: $7"
 
-STEP=$5
+STEP_R=$5
+STEP_G=$6
 
-# checking if a value for STEP was input in the command line 
-if [ -z "$STEP" ]; 
-then [ STEP = 1.0 ]; # default STEP value 
+# checking if a value for STEP_R was input in the command line 
+if [ -z "$STEP_R" ]; 
+then [ STEP_R = 1.0 ]; # default STEP value 
 fi
 
-# d1d2=$(echo "$d1 + $d2" | bc)
+# checking if a value for STEP was input in the command line 
+if [ -z "$STEP_G" ]; 
+then [ STEP_G = 1.0 ]; # default STEP value 
+fi
 
 tmp=1
 tmp1=1
@@ -27,7 +33,7 @@ tmp2=1
 tmp3=1
 
 # compiling the file (is this necessary??)
-g++ -o test_random_v3 test_random_v4.C $( root-config --libs --cflags )
+g++ -o test_random_v4 test_random_v4.C $( root-config --libs --cflags )
 
 #[ bc scale=2 n<=$1 ]
 # input values go into the test and a root file is created with that name
@@ -36,7 +42,7 @@ do
   tmp=$( echo " scale = 2; $n <= $1 "  | bc )
   if [ $tmp == 0 ];
   then
-    n=$( echo " scale = 2; $n + $STEP " | bc )
+    n=$( echo " scale = 2; $n + $STEP_R " | bc )
     continue
   fi
 
@@ -46,7 +52,7 @@ do
     tmp1=$( echo " scale = 2; $i <= $2 "  | bc )
     if [ $tmp1 == 0 ];
     then
-      i=$( echo " scale = 2; $i + $STEP " | bc )
+      i=$( echo " scale = 2; $i + $STEP_R " | bc )
       continue
     fi
 
@@ -56,7 +62,7 @@ do
       tmp2=$( echo " scale = 2; ( $j <= $3 ) "  | bc )
       if [ $tmp2 == 0 ];
       then
-        j=$( echo " scale = 2; $j + $STEP " | bc )
+        j=$( echo " scale = 2; $j + $STEP_G " | bc )
         continue
       fi
 
@@ -66,24 +72,24 @@ do
         tmp3=$( echo " scale = 2; ( $k <= $4 ) "  | bc )
         if [ $tmp3 == 0 ];
         then
-          k=$( echo " scale = 2; $k + $STEP " | bc )
+          k=$( echo " scale = 2; $k + $STEP_G " | bc )
           continue
         fi
 
-        ./test_random_v4 $n $i $j $k  
-        k=$( echo " scale = 2; $k + $STEP " | bc )
+        ./test_random_v4 $n $i $j $k ../../helixfiles/acptsim_merged_excl2.root $7
+        k=$( echo " scale = 2; $k + $STEP_G " | bc )
 
       done
       tmp2=$( echo " scale = 2; $j <= $3 "  | bc )
-      j=$( echo " scale = 2; $j + $STEP " | bc )
+      j=$( echo " scale = 2; $j + $STEP_G " | bc )
 
     done 
     tmp1=$( echo " scale = 2; $i <= $2 "  | bc )
-    i=$( echo " scale = 2; $i + $STEP " | bc )
+    i=$( echo " scale = 2; $i + $STEP_R " | bc )
 
   done
   tmp=$( echo " scale = 2; $n <= $1 "  | bc )
-  n=$( echo " scale = 2; $n + $STEP " | bc )
+  n=$( echo " scale = 2; $n + $STEP_R " | bc )
 
 done
 

@@ -38,7 +38,7 @@ void make_histo_pretty(TH1D* h,int setblue){
   if(setblue==0) h->SetLineColor(kBlue);
   else if(setblue==1) h->SetLineColor(kRed);
   else if(setblue==2) h->SetLineColor(kBlack);
-  h->GetXaxis()->SetTitle("idk");
+  h->GetXaxis()->SetTitle("Wire Position (cm)"); // I changed this from "idk"
   h->GetYaxis()->SetTitleOffset(1.4);
   h->GetYaxis()->SetTitle("entries");
 }
@@ -59,8 +59,8 @@ int main(int argc, char *argv[]) {
 
   //std::cout << "termination resistance N: " << argv[1] << std::endl;
   //std::cout << "termination resistance S: " << argv[2] << std::endl;
-  //std::cout << "gain N: " << argv[3] << std::endl;
-  //std::cout << "gain S: " << argv[4] << std::endl;
+  std::cout << "gain N: " << argv[3] << std::endl;
+  std::cout << "gain S: " << argv[4] << std::endl;
   
   //std::cout << "Position [x, y]: " << argv[5] << std::endl; // for the acptsim_merged_excl2.root file
 
@@ -72,8 +72,8 @@ int main(int argc, char *argv[]) {
   south_gain = atof(argv[4]);
 
   if ((atof(argv[3]) == 0) || (atof(argv[4]) == 0)) {
-    std::cout << "Gain (N) cannot be negative. " << std::endl;
-    std::cout << "Gain (N) automatically set to 1 " << std::endl;
+    //std::cout << "Gain cannot be negative or equal to 0. " << std::endl;
+    //std::cout << "Gain automatically set to 1. " << std::endl;
     north_gain = 1;
   }
 
@@ -120,8 +120,8 @@ int main(int argc, char *argv[]) {
 
   //std::unique_ptr<TH1D> proj1(wireFile->Get<TH1D>(proj0->ProjectionX("test1", wire_zpos, wire_zpos)));
   
-  TApplication *app = new TApplication("app", 0, 0);
-  gSystem->ProcessEvents(); // for getting the graphics to display
+  //TApplication *app = new TApplication("app", 0, 0);
+  //gSystem->ProcessEvents(); // for getting the graphics to display
 
 
   //TCanvas *cDCTdist = new TCanvas("cDCTdist", "hposXZDCT - 2D Histogram");
@@ -150,7 +150,7 @@ int main(int argc, char *argv[]) {
   //cDCTdist->cd();
   //proj0->Draw();
   cDCTproj->cd();
-  proj1->Draw(); // testing to see if we have the right histogram 
+  //proj1->Draw(); // testing to see if we have the right histogram 
 
   //app->Run(); // running the graphics using TApplication
 
@@ -233,13 +233,12 @@ int main(int argc, char *argv[]) {
   std::cout << "Bin Width = " << h_divKS->GetBinWidth(199) << std::endl;
 
   */
+  
   // Check if the histograms are from the same distribution using Kolmogorov-Smirnov test 
-  //double test = h_div->KolmogorovTest(reBinnedProj);
-  double test = h_divKS->KolmogorovTest(proj1);
+  //double test = h_divKS->KolmogorovTest(proj1);
 
-  std::cout << "Kolmogorov-Smirnov Test Result: " << test << std::endl;
-  //std::cout << "nbins h_div: " << h_divKS->GetNbinsX() << std::endl;
-  //std::cout << "nbins proj1: " << proj1->GetNbinsX() << std::endl;
+  //std::cout << "Kolmogorov-Smirnov Test Result: " << test << std::endl;
+
 
   // now apply a voltage to this
 
@@ -272,9 +271,9 @@ int main(int argc, char *argv[]) {
   make_histo_pretty(h_calcqdv,1);
   //make_histo_pretty(h_calcqdv2,2);
 
-  h_calcqdv->Draw();
-  //h_calcqdv2->Draw("SAME");
-  h_div->Draw("SAME");
+  //h_calcqdv->Draw();
+  //h_div->Draw("SAME");
+  
   // c->SaveAs("GainRatio_resistance_model.png"); // SAVING THE HISTOGRAM AS A PNG 
 
   TCanvas * c2 = new TCanvas("c_ref2","Original Wire Charge Distribution", 200,50,600,600);
@@ -301,7 +300,7 @@ int main(int argc, char *argv[]) {
   */
 
 
-  app->Run(); // running all graphics using TApplication
+  //app->Run(); // running all graphics using TApplication
 
 
   // saving the histogram: 
@@ -309,8 +308,10 @@ int main(int argc, char *argv[]) {
 
   std::string term_resN_str(argv[1]);
   std::string term_resS_str(argv[2]);
-  std::string gainN_str(argv[3]);
-  std::string gainS_str(argv[4]);
+  int gainr = static_cast<int>((north_gain / south_gain) * 100.); // the gain ratio only goes to the 1000ths place
+  float gainratio = static_cast<float>(gainr/100.);
+  std::cout << gainr << ", " << gainratio << std::endl;
+  std::string gainstr = std::to_string(gainratio);
 
 
   std::string underscore = "_";
@@ -319,7 +320,7 @@ int main(int argc, char *argv[]) {
   std::string folder = "wiresim_files" + std::string(argv[6]) + "/";
   //std::string original = "_original";
 
-  std::string path = folder + prefix + term_resN_str + underscore + term_resS_str + underscore + gainN_str + underscore + gainS_str + root_str;
+  std::string path = folder + prefix + term_resN_str + underscore + term_resS_str + underscore + gainstr.substr(0,4) + root_str;
 
   const char *path_c = path.c_str();
 
@@ -331,7 +332,7 @@ int main(int argc, char *argv[]) {
   h_calcqdv->Write(); // histogram with new distribution/parameter values 
 
   std::cout << "Path to File: " << path_c << std::endl;
-  std::cout << "Histograms saved!" << std::endl;
+  //std::cout << "Histograms saved!" << std::endl;
 
 
   // for changing the object lifetime management (avoiding memory leaks)
