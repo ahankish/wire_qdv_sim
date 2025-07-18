@@ -21,6 +21,7 @@
 #include<TF1.h>
 #include <TSystem.h>
 #include <TFile.h>
+#include <TApplication.h>
 
 
 double qdv_func3(const double* ndims) {
@@ -47,16 +48,59 @@ double qdv_func3(const double* ndims) {
     // the file doesn't exist and the program will skip to the next model 
     return 1;
   }
+  //else {
+    //std::cout << "Found the file!" << std::endl;
+  //}
+
   std::unique_ptr<TH1> model(myFile->Get<TH1>("Charge Division calculated")); // the model histogram
+  //std::unique_ptr<TH1> model(myFile->Get<TH1>("Charge Div KS")); // the model histogram
 
   // testing against a random histogram
+  TH1D* test_hist = new TH1D("Test Histogram", "", 200,-0.05,1.05);
   std::unique_ptr<TFile> wireFile( TFile::Open("../../helixfiles/acptsim_merged_excl2.root") );
   std::unique_ptr<TH2D> proj0(wireFile->Get<TH2D>("hposXZDCT"));
   TH1D* proj1 = proj0->ProjectionX("test1", 130, 130);
+  double min_val = proj1->GetBinCenter(proj1->FindFirstBinAbove(0));
+  for (int i=0; i<1000000; i++) {
+    // Filling with uniform random values
+    //test_hist->Fill( gRandom->Uniform(0,1) );
+    test_hist->Fill((proj1->GetRandom() - min_val) / ((-min_val) - min_val));
+  }
+
+  //TApplication *app = new TApplication("app", 0, 0);
+  //gSystem->ProcessEvents(); // for getting the graphics to display
+  //test_hist->Draw();
+  //model->Draw();
+  //app->Run(); // running the graphics using TApplication
+  
+  /*
+  std::unique_ptr<TFile> wireFile( TFile::Open("../../helixfiles/acptsim_merged_excl2.root") );
+  std::unique_ptr<TH2D> proj0(wireFile->Get<TH2D>("hposXZDCT"));
+  TH1D* proj1 = proj0->ProjectionX("test1", 130, 130);
+  TH1* reBinnedProj = proj1->Rebin(5, "Rebinned projection");
+  */
+
+  /*
+  //----------------------------------------------------------------------------------
+  // Fix the bin edges for the K-S test
+  TAxis* xaxis = proj1->GetXaxis();
+  int lowedge = xaxis->GetBinLowEdge(0);
+  std::cout << "Bin Low Edge = " << lowedge << std::endl;
+  int upedge = xaxis->GetBinUpEdge(199);
+  std::cout << "Bin Up Edge = " << upedge << std::endl;
+  //----------------------------------------------------------------------------------
+  */
 
   // compare the histograms - the data (histo) is the one that we want to compare everything to
-  int tmp = static_cast<int>((1 - model->KolmogorovTest(proj1)) * 1000.);
-  return static_cast<float>(tmp/1000.); //  flipping it because the function is going to minimize? 
+  //int tmp = static_cast<int>((1 - model->KolmogorovTest(proj1)) * 1000.);
+  //int tmp = static_cast<int>((1 - model->KolmogorovTest(reBinnedProj)) * 1000.);
+  //return static_cast<float>(tmp/1000.); //  flipping it because the function is going to minimize? 
+
+  //double test = model->KolmogorovTest(proj1);
+  //double test = model->KolmogorovTest(reBinnedProj);
+  double test = model->KolmogorovTest(test_hist);
+  std::cout << "KS Test Result = " << test << std::endl;
+  return 1. - test;
 }
 
 int main(int argc, char *argv[]){
@@ -94,7 +138,7 @@ int main(int argc, char *argv[]){
    // create funciton wrapper for minmizer
    // a IMultiGenFunction type
    ROOT::Math::Functor f(&qdv_func3, 5);
-   double step[3] = { 1,1,0.01 };
+   double step[3] = { 10,10,0.01 };
    // starting point
 
    double variable[3];
@@ -123,7 +167,7 @@ int main(int argc, char *argv[]){
    std::cout << "Minimum: f(" << xs[0] << "," << xs[1] << "," << xs[2] << "): "
              << min->MinValue()  << std::endl;
 
-   // expected minimum is 0
+   /*// expected minimum is 0
    if ( min->MinValue()  < 1.E-4  && f(xs) < 1.E-4)
       std::cout << "Minimizer " << "Minuit2" << " - " << ""
                 << "   converged to the right minimum" << std::endl;
@@ -132,6 +176,7 @@ int main(int argc, char *argv[]){
                 << "   failed to converge !!!" << std::endl;
       Error("NumericalMinimization","fail to converge");
    }
+   */
 
    return 0;
 }

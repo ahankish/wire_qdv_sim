@@ -10,11 +10,11 @@
 
 #include <string>
 #include <TFile.h>
-#include <cmath>
 #include <TH2D.h>
 #include <TApplication.h>
 #include <TMarker.h>
 #include <TSystem.h> 
+#include <cmath>
 //#include <TVirtualFFT.h>
 
 // constants that do NOT change from wire-to-wire
@@ -59,8 +59,8 @@ int main(int argc, char *argv[]) {
 
   //std::cout << "termination resistance N: " << argv[1] << std::endl;
   //std::cout << "termination resistance S: " << argv[2] << std::endl;
-  std::cout << "gain N: " << argv[3] << std::endl;
-  std::cout << "gain S: " << argv[4] << std::endl;
+  //std::cout << "gain N: " << argv[3] << std::endl;
+  //std::cout << "gain S: " << argv[4] << std::endl;
   
   //std::cout << "Position [x, y]: " << argv[5] << std::endl; // for the acptsim_merged_excl2.root file
 
@@ -88,8 +88,8 @@ int main(int argc, char *argv[]) {
 
 //======================================================================================================================
 
-  std::cout << "File Name: " << argv[5] << std::endl;
-  std::cout << "Wire Position: " << argv[6] << std::endl;
+  //std::cout << "File Name: " << argv[5] << std::endl;
+  //std::cout << "Wire Position: " << argv[6] << std::endl;
 
 
   std::string filename(argv[5]);
@@ -173,21 +173,24 @@ int main(int argc, char *argv[]) {
 
   // min and max chargediv can be used to first sample for fraction
   TH1D * h_div = new TH1D("Charge Division", "", 200,-0.05,1.05);  
-  TH1D * h_divKS = new TH1D("Charge Div KS", "", 1000,-270,270);  
+  //TH1D * h_divKS = new TH1D("Charge Div KS", "", 1000,-270,270);  
   //create histogram for true position
   TH1D * h_true_pos = new TH1D("True Position", "", 200,-1.1*DCT_wire_length/2.0,1.1*DCT_wire_length/2.0); //*********** */
   TH1D * h_calcqdv = new TH1D("Charge Division calculated", "", 200,-0.05,1.05);  
+  //TH1D* h_calcqdv_KS = new TH1D("Charge Div KS calculated", "", 1000,-270,270); 
   //TH1D * h_calcqdv2 = new TH1D("Charge Division calculated2", "", 200,-0.05,1.05);  //****************** */
 
   //disable display of histogram statistics
   h_div->SetStats(false);
   h_calcqdv->SetStats(false);
   h_true_pos->SetStats(false);
+  //h_divKS->SetStats(false);
   //fill with true hit positions
   for(double i = 0; i < num_entries; i++){
-    double qdv_true, qdv_trueKS; 
+    double qdv_true;
+    //double qdv_trueKS; 
     
-    qdv_trueKS = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
+    //qdv_trueKS = proj1->GetRandom(); // CHANGED FROM GAUSS TO UNIFORM TO SHOOTING FROM WIRE DISTRIBUTION
 
     // scaling the wire distribution to [0,1]
     qdv_true = (proj1->GetRandom() - min_val) / ((-min_val) - min_val);
@@ -195,16 +198,17 @@ int main(int argc, char *argv[]) {
 
     //if(i<0.01*num_entries) qdv_true = gRandom->Uniform(0,1);
     //else qdv_true=gRandom->Uniform(0.5,0.1); // CHANGED FROM GAUSS TO UNIFORM
-    //else qdv_true=gRandom->Gaus(0.5,0.1);  // CHANGE FROM GAUSS DISTRIBUTION TO A UNIFORM RANDOM DISTRIBUTION *************
+    //else qdv_true=gRandom->Gaus(0.5,0.1);  // CHANGE FROM GAUSS DISTRIBUTION TO A UNIFORM RANDOM DISTRIBUTION ********
     //double qdv_true =gRandom->Gaus(0.5,0.1);
     h_div->Fill(qdv_true);
-    h_divKS->Fill(qdv_trueKS);
+    //h_divKS->Fill(qdv_true);
 
     double qdv_true_pos= convert_qdv_to_pos(qdv_true);
     h_true_pos->Fill(qdv_true_pos);
     //h_true_pos->Fill(gRandom->Uniform(-1.0*DCT_wire_length/2.0,DCT_wire_length/2.0));
 
-    // if qdv is close to 1 then the hit position was close to north side and we should get a larger voltage reading for north side and less resistance from wire contributing!
+    // if qdv is close to 1 then the hit position was close to north side and we should get a larger 
+    // voltage reading for north side and less resistance from wire contributing!
     double res_north=(1.0-qdv_true)*DCT_wire_resistance;
     double res_south=qdv_true*DCT_wire_resistance;
     double total_resN=res_north+termination_resN;
@@ -215,9 +219,11 @@ int main(int argc, char *argv[]) {
     //double qdv_new=total_resS/(total_resS+(Gain_ratio2*total_resN));
     
     //double qdv_new=(north_gain/south_gain)*total_resN/(total_resS+(north_gain*total_resN/south_gain));
-    double qdv_new=(north_gain/total_resN)/((north_gain/total_resN)+ (south_gain/total_resS));
+    double qdv_new=(north_gain/total_resN)/((north_gain/total_resN)+(south_gain/total_resS));
 
     h_calcqdv->Fill(qdv_new);
+    //h_divKS->Fill(qdv_new);
+    //h_calcqdv_KS->Fill(qdv_new);
     //qdv_new=res_south/(res_south+(Gain_ratio2*res_north));
     //h_calcqdv2->Fill(qdv_new);
     // now we can calculate the 
@@ -304,14 +310,18 @@ int main(int argc, char *argv[]) {
 
 
   // saving the histogram: 
-  std::cout << "Saving histograms to file..." << std::endl;
+  //std::cout << "Saving histograms to file..." << std::endl;
 
   std::string term_resN_str(argv[1]);
   std::string term_resS_str(argv[2]);
-  int gainr = static_cast<int>((north_gain / south_gain) * 100.); // the gain ratio only goes to the 1000ths place
-  float gainratio = static_cast<float>(gainr/100.);
-  std::cout << gainr << ", " << gainratio << std::endl;
-  std::string gainstr = std::to_string(gainratio);
+  //int gainr = static_cast<int>((north_gain / south_gain) * 100.); // the gain ratio only goes to the 1000ths place
+  //float gainratio = static_cast<float>(gainr/100.);
+  float gain_ratio = north_gain / south_gain;
+  if (std::isinf( gain_ratio )) {
+    return 0;
+  }
+  //std::cout << gainr << ", " << gainratio << std::endl;
+  std::string gainstr = std::to_string(gain_ratio);
 
 
   std::string underscore = "_";
@@ -327,11 +337,12 @@ int main(int argc, char *argv[]) {
   std::unique_ptr<TFile> myFile( TFile::Open(path_c, "RECREATE") );
 
 
+  //h_divKS->Write(); // for Kolmogorov-Smirnov testing
   h_div->Write(); // histogram with original distribution (parameters are 0 0 0 0)
 
   h_calcqdv->Write(); // histogram with new distribution/parameter values 
 
-  std::cout << "Path to File: " << path_c << std::endl;
+  std::cout << "New file created. Path to file: " << path_c << std::endl;
   //std::cout << "Histograms saved!" << std::endl;
 
 
