@@ -32,15 +32,23 @@ double qdv_func3(const double* ndims) {
   std::string termResN = regex_replace(std::to_string(ndims[0]), std::__cxx11::regex("0+$"), "").substr(0, 4);
   std::string termResS = regex_replace(std::to_string(ndims[1]), std::__cxx11::regex("0+$"), "").substr(0, 4);
 
-  if (ndims[0] == floor(ndims[0])) {
+  if (ndims[0] == static_cast<int>(ndims[0])) {
     //std::string termResN = std::to_string(static_cast<int>(ndims[0])).substr(0, 4);
+    std::cout << "integer found" << std::endl;
     termResN = std::to_string(static_cast<int>(ndims[0]));
+  }
+  else if (ndims[0] < 10) {
+    termResN = regex_replace(std::to_string(ndims[0]), std::__cxx11::regex("0+$"), "").substr(0, 3);
   }
 
   if (ndims[1] == static_cast<int>(ndims[1])) {
     //std::string termResS = std::to_string(static_cast<int>(ndims[1])).substr(0, 4);
     termResS = std::to_string(static_cast<int>(ndims[1]));
   }
+  else if (ndims[1] < 10) {
+    termResS = regex_replace(std::to_string(ndims[1]), std::__cxx11::regex("0+$"), "").substr(0, 3);
+  }
+
 
   std::string gainRatio = std::to_string(ndims[2]).substr(0,4); // the gain ratio only goes to the thousandths place right now
   std::string wirelo = std::to_string(static_cast<int>(ndims[3])); // the position of the wire in the dct
@@ -53,8 +61,12 @@ double qdv_func3(const double* ndims) {
     return 1;
   }
   
-  // making the filename 
+  // making the filename
   std::string filename = folder + "wire_" + termResN + "_" + termResS + "_" + gainRatio + ".root";
+
+  // generating the file
+  //model_generator_v1(ndims[0], ndims[1], ndims[2], 1,
+                        //"../../helixfiles/acptsim_merged_excl2.root", ndims[3]);
 
   // opening the model file
   std::unique_ptr<TFile> myFile( TFile::Open(filename.c_str()) );
@@ -89,14 +101,6 @@ double qdv_func3(const double* ndims) {
     test_hist->Fill(hist_tmp->GetRandom());
   }
 
-
-  //TApplication *app = new TApplication("app", 0, 0);
-  //gSystem->ProcessEvents(); // for getting the graphics to display
-  //test_hist->Draw();
-  //model->Draw();
-  //app->Run();
-
-
   double test = model->KolmogorovTest(test_hist);
   if (test < 0) {
     return 1;
@@ -104,6 +108,7 @@ double qdv_func3(const double* ndims) {
   std::cout << "KS Test Result = " << test << std::endl; // turn into a log likelihood function
   return 1. - test;
 }
+
 
 int main(int argc, char *argv[]){
    // create minimizer giving a name and a name (optionally) for the specific
@@ -122,19 +127,10 @@ int main(int argc, char *argv[]){
    int wirepos = atoi(argv[1]); // which wire are we analyzing rn
    // this means the models are stored in files at wiresim_files[wirepos]
 
-   // Sending logs to file 
-   //std::unique_ptr<TFile> myFile( TFile::Open("logfile.txt", "UPDATE") );
-
-   //if (!myFile || myFile->IsZombie()) { // checking if the file opened properly
-     // the file doesn't exist and the program will skip to the next model 
-     //return 1.;
-   //}
-
-   //std::ofstream* logfile;
    std::string output_file = "logfile_" + std::to_string(wirepos) + ".txt";
-   //logfile->open("logfile.txt", std::ofstream::app);
-   std::ofstream logfile(output_file.c_str());
-   logfile << "Log for wire " << wirepos << " \n";
+   std::ofstream logfile(output_file.c_str(), std::ofstream::app); // appends to the file
+   //std::ofstream logfile(output_file.c_str()); // replaces file
+   logfile << "\nLog for wire " << wirepos << "... \n";
 
     // Redirecting cout to write to "output.txt"
     std::cout.rdbuf(logfile.rdbuf());
@@ -148,18 +144,21 @@ int main(int argc, char *argv[]){
    min->SetMaxIterations(10000);  // for GSL
    //min->SetTolerance(0.001);
    min->SetPrintLevel(1);
+   min->SetStrategy(2);
 
    // create funciton wrapper for minmizer
    // a IMultiGenFunction type
    ROOT::Math::Functor f(&qdv_func3, 4);
-   double step[3] = { 100,100,0.5 }; // close to 50 ohms 
+   double step[3] = { 8,8,0.1 }; // close to 50 ohms 
    // starting point
 
    double variable[3];
-   variable[0] = 50;
-   variable[1] = 50;
-   variable[2] = 1.50;
+   variable[0] = 10;
+   variable[1] = 10;
+   variable[2] = 1.3;
 
+   std::cout << "   Starting Values: " << variable[0] << ", " << variable[1] << ", " << variable[2] << std::endl;
+   std::cout << "   Step: " << step[0] << ", " << step[1] << ", " << step[2] << std::endl;
    //TRandom2 r(-1);
    //variable[0] = r.Uniform(10.,200.); // not sure what the ranges for these should be 
    //variable[1] = r.Uniform(10.,200.);

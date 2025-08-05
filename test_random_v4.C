@@ -1,12 +1,12 @@
-#include<iostream>
-#include<TH1D.h>
-#include<TF1.h>
-#include<TCanvas.h>
-#include<TRandom.h>
-#include<TStyle.h>
-#include<TLegend.h>
-#include<TROOT.h>
-#include<TPaveText.h>
+#include <iostream>
+#include <TH1D.h>
+#include <TF1.h>
+#include <TCanvas.h>
+#include <TRandom.h>
+#include <TStyle.h>
+#include <TLegend.h>
+#include <TROOT.h>
+#include <TPaveText.h>
 
 #include <string>
 #include <TFile.h>

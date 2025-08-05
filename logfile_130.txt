@@ -1,0 +1,1209 @@
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 100, 100, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.7844, 50, 1.5)
+(49.2156, 50, 1.5)
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(50, 50.7844, 1.5)
+(50, 49.2156, 1.5)
+(50, 57.8121, 1.5)
+(50, 42.1879, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 18
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 100, 100, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.7844, 50, 1.5)
+(49.2156, 50, 1.5)
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(50, 50.7844, 1.5)
+(50, 49.2156, 1.5)
+(50, 57.8121, 1.5)
+(50, 42.1879, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 18
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 1, 1, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.01, 50, 1.5)
+(49.99, 50, 1.5)
+(50.1, 50, 1.5)
+(49.9, 50, 1.5)
+(50, 50.01, 1.5)
+(50, 49.99, 1.5)
+(50, 50.1, 1.5)
+(50, 49.9, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(50.1, 50, 1.5)
+(49.9, 50, 1.5)
+(51, 50, 1.5)
+(49, 50, 1.5)
+(59.9341, 50, 1.5)
+(40.0659, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 22
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 10, 10, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.1007, 50, 1.5)
+(49.8993, 50, 1.5)
+(51.0067, 50, 1.5)
+(48.9933, 50, 1.5)
+(50, 50.1007, 1.5)
+(50, 49.8993, 1.5)
+(50, 51.0067, 1.5)
+(50, 48.9933, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(51.0067, 50, 1.5)
+(48.9933, 50, 1.5)
+(60, 50, 1.5)
+(40, 50, 1.5)
+KS Test Result = 0
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 20
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 25, 25, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.2618, 50, 1.5)
+(49.7382, 50, 1.5)
+(52.6168, 50, 1.5)
+(47.3832, 50, 1.5)
+(50, 50.2618, 1.5)
+(50, 49.7382, 1.5)
+(50, 52.6168, 1.5)
+(50, 47.3832, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(52.6168, 50, 1.5)
+(47.3832, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 18
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 50, 50, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.7844, 50, 1.5)
+(49.2156, 50, 1.5)
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(50, 50.7844, 1.5)
+(50, 49.2156, 1.5)
+(50, 57.8121, 1.5)
+(50, 42.1879, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 18
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 75, 75, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.7844, 50, 1.5)
+(49.2156, 50, 1.5)
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(50, 50.7844, 1.5)
+(50, 49.2156, 1.5)
+(50, 57.8121, 1.5)
+(50, 42.1879, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(57.8121, 50, 1.5)
+(42.1879, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 18
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 45, 45, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.5599, 50, 1.5)
+(49.4401, 50, 1.5)
+(55.5872, 50, 1.5)
+(44.4128, 50, 1.5)
+(50, 50.5599, 1.5)
+(50, 49.4401, 1.5)
+(50, 55.5872, 1.5)
+(50, 44.4128, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(55.5872, 50, 1.5)
+(44.4128, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 18
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 8, 8, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 1
+(50, 50, 1.5)
+KS Test Result = 0
+(50.0803, 50, 1.5)
+(49.9197, 50, 1.5)
+(50.8034, 50, 1.5)
+(49.1966, 50, 1.5)
+(50, 50.0803, 1.5)
+(50, 49.9197, 1.5)
+(50, 50.8034, 1.5)
+(50, 49.1966, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(50.8034, 50, 1.5)
+(49.1966, 50, 1.5)
+(58, 50, 1.5)
+(42, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 20
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1.5
+   Step: 8, 8, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(50, 50, 1.5)
+KS Test Result = 0
+(50.0803, 50, 1.5)
+(49.9197, 50, 1.5)
+(50.8034, 50, 1.5)
+(49.1966, 50, 1.5)
+(50, 50.0803, 1.5)
+(50, 49.9197, 1.5)
+(50, 50.8034, 1.5)
+(50, 49.1966, 1.5)
+(50, 50, 1.50693)
+KS Test Result = 0
+(50, 50, 1.49311)
+(50, 50, 1.57115)
+KS Test Result = 0
+(50, 50, 1.43294)
+(50, 50, 1.5)
+KS Test Result = 0
+(50.8034, 50, 1.5)
+(49.1966, 50, 1.5)
+(58, 50, 1.5)
+(42, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+(50, 50, 1.5)
+KS Test Result = 0
+(50.8034, 50, 1.5)
+(49.1966, 50, 1.5)
+(58, 50, 1.5)
+(42, 50, 1.5)
+(74.4089, 50, 1.5)
+(25.5911, 50, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 27
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 10, 10, 1.5
+   Step: 8, 8, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(10, 10, 1.5)
+(10.0891, 10, 1.5)
+(9.9113, 10, 1.5)
+(10.9062, 10, 1.5)
+(9.12893, 10, 1.5)
+(10, 10.0891, 1.5)
+(10, 9.9113, 1.5)
+(10, 10.9062, 1.5)
+(10, 9.12893, 1.5)
+(10, 10, 1.50693)
+(10, 10, 1.49311)
+(10, 10, 1.57115)
+(10, 10, 1.43294)
+(10, 10, 1.5)
+(10.9062, 10, 1.5)
+(9.12893, 10, 1.5)
+(20.5006, 10, 1.5)
+(2.98438, 10, 1.5)
+(29.7355, 10, 1.5)
+(0.444902, 10, 1.5)
+(10, 10, 1.5)
+(10.9062, 10, 1.5)
+(9.12893, 10, 1.5)
+(20.5006, 10, 1.5)
+(2.98438, 10, 1.5)
+(29.7355, 10, 1.5)
+(0.444902, 10, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 27
+Minimum: 1
+  North Term Res: 10
+  South Term Res: 10
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 10, 10, 1.5
+   Step: 8, 8, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(10, 10, 1.5)
+(10.0891, 10, 1.5)
+(9.9113, 10, 1.5)
+(10.9062, 10, 1.5)
+(9.12893, 10, 1.5)
+(10, 10.0891, 1.5)
+(10, 9.9113, 1.5)
+(10, 10.9062, 1.5)
+(10, 9.12893, 1.5)
+(10, 10, 1.50693)
+(10, 10, 1.49311)
+(10, 10, 1.57115)
+(10, 10, 1.43294)
+(10, 10, 1.5)
+(10.9062, 10, 1.5)
+(9.12893, 10, 1.5)
+(20.5006, 10, 1.5)
+(2.98438, 10, 1.5)
+(29.7355, 10, 1.5)
+(0.444902, 10, 1.5)
+(10, 10, 1.5)
+(10.9062, 10, 1.5)
+(9.12893, 10, 1.5)
+(20.5006, 10, 1.5)
+(2.98438, 10, 1.5)
+(29.7355, 10, 1.5)
+(0.444902, 10, 1.5)
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 27
+Minimum: 1
+  North Term Res: 10
+  South Term Res: 10
+  Gain Ratio: 1.5
+
+Log for wire 130... 
+   Starting Values: 10, 10, 1.3
+   Step: 8, 8, 0.1
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(10, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_10_1.3.root
+KS Test Result = 0
+(10.0891, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10.0891_10_1.3.root
+KS Test Result = 0
+(9.9113, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_9.9113_10_1.3.root
+KS Test Result = 0
+(10.9062, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10.9062_10_1.3.root
+KS Test Result = 0
+(9.12893, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_9.12893_10_1.3.root
+KS Test Result = 0
+(10, 10.0891, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_10.0891_1.3.root
+KS Test Result = 0
+(10, 9.9113, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_9.9113_1.3.root
+KS Test Result = 0
+(10, 10.9062, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_10.9062_1.3.root
+KS Test Result = 0
+(10, 9.12893, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_9.12893_1.3.root
+KS Test Result = 0
+(10, 10, 1.30101)
+New file created. Path to file: wiresim_files130/wire_10_10_1.30101.root
+KS Test Result = 0
+(10, 10, 1.29899)
+New file created. Path to file: wiresim_files130/wire_10_10_1.29899.root
+KS Test Result = 0
+(10, 10, 1.31022)
+New file created. Path to file: wiresim_files130/wire_10_10_1.31022.root
+KS Test Result = 0
+(10, 10, 1.28994)
+New file created. Path to file: wiresim_files130/wire_10_10_1.28994.root
+KS Test Result = 0
+(10, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_10_1.3.root
+KS Test Result = 0
+(10.9062, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10.9062_10_1.3.root
+KS Test Result = 0
+(9.12893, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_9.12893_10_1.3.root
+KS Test Result = 0
+(20.5006, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_20.5006_10_1.3.root
+KS Test Result = 0
+(2.98438, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_2.98438_10_1.3.root
+KS Test Result = 0
+(29.7355, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_29.7355_10_1.3.root
+KS Test Result = 0
+(0.444902, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_0.444902_10_1.3.root
+KS Test Result = 0
+(10, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10_10_1.3.root
+KS Test Result = 0
+(10.9062, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_10.9062_10_1.3.root
+KS Test Result = 0
+(9.12893, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_9.12893_10_1.3.root
+KS Test Result = 0
+(20.5006, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_20.5006_10_1.3.root
+KS Test Result = 0
+(2.98438, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_2.98438_10_1.3.root
+KS Test Result = 0
+(29.7355, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_29.7355_10_1.3.root
+KS Test Result = 0
+(0.444902, 10, 1.3)
+New file created. Path to file: wiresim_files130/wire_0.444902_10_1.3.root
+KS Test Result = 0
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 27
+Minimum: 1
+  North Term Res: 10
+  South Term Res: 10
+  Gain Ratio: 1.3
+
+Log for wire 130... 
+   Starting Values: 10, 10, 1
+   Step: 8, 8, 0.1
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00504293
+(10.0891, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0891_10_1.01.root
+KS Test Result = 0.000405695
+(9.9113, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.9113_10_1.01.root
+KS Test Result = 0.000217504
+(10.0089, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0089_10_1.01.root
+KS Test Result = 0.000186894
+(9.99111, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99111_10_1.01.root
+KS Test Result = 2.45945e-06
+(10.0009, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0009_10_1.01.root
+KS Test Result = 5.2936e-08
+(9.99911, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99911_10_1.01.root
+KS Test Result = 0.00105064
+(10.0001, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0001_10_1.01.root
+KS Test Result = 6.40439e-05
+(9.99991, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99991_10_1.01.root
+KS Test Result = 0.0329906
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00494513
+(9.99999, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99999_10_1.01.root
+KS Test Result = 0.000474536
+(10, 10.0891, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10.0891_1.01.root
+KS Test Result = 0.000447849
+(10, 9.9113, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.9113_1.01.root
+KS Test Result = 0.00372793
+(10, 10.0089, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10.0089_1.01.root
+KS Test Result = 0.0173373
+(10, 9.99111, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99111_1.01.root
+KS Test Result = 0.0114606
+(10, 10.0009, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10.0009_1.01.root
+KS Test Result = 6.25374e-08
+(10, 9.99911, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99911_1.01.root
+KS Test Result = 0.000422579
+(10, 10.0001, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10.0001_1.01.root
+KS Test Result = 4.69195e-05
+(10, 9.99991, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99991_1.01.root
+KS Test Result = 0.0288301
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00203456
+(10, 9.99999, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99999_1.01.root
+KS Test Result = 6.50791e-07
+(10, 10, 1.01033)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01033.root
+KS Test Result = 1.1468e-06
+(10, 10, 1.00967)
+New file created. Path to file: wiresim_files130/wire_10_10_1.00967.root
+KS Test Result = 0.000736062
+(10, 10, 1.01003)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01003.root
+KS Test Result = 0.000150821
+(10, 10, 1.00997)
+New file created. Path to file: wiresim_files130/wire_10_10_1.00997.root
+KS Test Result = 1.35469e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000412852
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 7.59293e-07
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 2.3431e-10
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 1.68767e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0346293
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0265402
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00454857
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.216275
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 8.02878e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 1.16432e-06
+(9.99999, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99999_10_1.01.root
+KS Test Result = 0.00116586
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000104486
+(10, 9.99999, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99999_1.01.root
+KS Test Result = 0.00150347
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000699676
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000150821
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.001682
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 6.86941e-07
+(9.99999, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99999_10_1.01.root
+KS Test Result = 0.000684051
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000166406
+(10, 9.99999, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99999_1.01.root
+KS Test Result = 0.000112649
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 7.53476e-07
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0169632
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 7.46947e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000430016
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0002513
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00501831
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000315127
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00304559
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 6.58536e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000782941
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0104608
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00651726
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000142673
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00945276
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000523362
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0281254
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 1.84167e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000517382
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0868671
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00482532
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00039173
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0210509
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000529407
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00217789
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00853356
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 3.24983e-08
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000141794
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00045835
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 6.96193e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0301624
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 6.35867e-07
+(36.8152, 10.9157, 4.54221)
+New file created. Path to file: wiresim_files130/wire_36.8152_10.9157_4.54221.root
+KS Test Result = 0
+(21.8887, 10.4534, 3.76986)
+New file created. Path to file: wiresim_files130/wire_21.8887_10.4534_3.76986.root
+KS Test Result = 0
+(15.4748, 10.2256, 1.97549)
+New file created. Path to file: wiresim_files130/wire_15.4748_10.2256_1.97549.root
+KS Test Result = 0
+(12.6101, 10.1125, 4.68755)
+New file created. Path to file: wiresim_files130/wire_12.6101_10.1125_4.68755.root
+KS Test Result = 0
+(11.272, 10.0562, 3.65428)
+New file created. Path to file: wiresim_files130/wire_11.272_10.0562_3.65428.root
+KS Test Result = 0
+(10.6276, 10.0281, 4.07714)
+New file created. Path to file: wiresim_files130/wire_10.6276_10.0281_4.07714.root
+KS Test Result = 0
+(10.3117, 10.014, 4.04716)
+New file created. Path to file: wiresim_files130/wire_10.3117_10.014_4.04716.root
+KS Test Result = 0
+(10.1553, 10.007, 3.88763)
+New file created. Path to file: wiresim_files130/wire_10.1553_10.007_3.88763.root
+KS Test Result = 0
+(10.0775, 10.0035, 4.13834)
+New file created. Path to file: wiresim_files130/wire_10.0775_10.0035_4.13834.root
+KS Test Result = 0
+(10.0387, 10.0018, 2.16148)
+New file created. Path to file: wiresim_files130/wire_10.0387_10.0018_2.16148.root
+KS Test Result = 0
+(10.0194, 10.0009, 4.6288)
+New file created. Path to file: wiresim_files130/wire_10.0194_10.0009_4.6288.root
+KS Test Result = 0
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0057787
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00558608
+(9.99999, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_9.99999_10_1.01.root
+KS Test Result = 7.13944e-07
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000149895
+(10, 9.99999, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_9.99999_1.01.root
+KS Test Result = 1.94025e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 6.87325e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 1.13814e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00359918
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000203493
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00504293
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 9.73559e-09
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 5.59251e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.0287116
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00971857
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000639118
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.115742
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 2.05914e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 3.65258e-06
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 5.10678e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 3.03591e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000118422
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 3.44433e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 3.31e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 2.36129e-07
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000305932
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00242934
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 3.28811e-05
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.000155537
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 0.00521835
+(10, 10, 1.01)
+New file created. Path to file: wiresim_files130/wire_10_10_1.01.root
+KS Test Result = 6.26102e-07
+(10.0831, 10.0984, 1.01092)
+New file created. Path to file: wiresim_files130/wire_10.0831_10.0984_1.01092.root
+KS Test Result = 3.82844e-05
+(10.0415, 10.0491, 1.01046)
+New file created. Path to file: wiresim_files130/wire_10.0415_10.0491_1.01046.root
+KS Test Result = 0.000396334
+(10.0208, 10.0246, 1.01023)
+New file created. Path to file: wiresim_files130/wire_10.0208_10.0246_1.01023.root
+KS Test Result = 9.19668e-07
+(10.0104, 10.0123, 1.01011)
+New file created. Path to file: wiresim_files130/wire_10.0104_10.0123_1.01011.root
+KS Test Result = 1.14728e-05
+(10.0052, 10.0061, 1.01006)
+New file created. Path to file: wiresim_files130/wire_10.0052_10.0061_1.01006.root
+KS Test Result = 0.0115128
+(10.0026, 10.0031, 1.01003)
+New file created. Path to file: wiresim_files130/wire_10.0026_10.0031_1.01003.root
+KS Test Result = 0.000480049
+(10.0013, 10.0015, 1.01001)
+New file created. Path to file: wiresim_files130/wire_10.0013_10.0015_1.01001.root
+KS Test Result = 0.00199224
+(10.0006, 10.0008, 1.01001)
+New file created. Path to file: wiresim_files130/wire_10.0006_10.0008_1.01001.root
+KS Test Result = 7.61388e-05
+(10.0003, 10.0004, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0003_10.0004_1.01.root
+KS Test Result = 0.000103182
+(10.0002, 10.0002, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0002_10.0002_1.01.root
+KS Test Result = 9.55455e-07
+(10.0001, 10.0001, 1.01)
+New file created. Path to file: wiresim_files130/wire_10.0001_10.0001_1.01.root
+KS Test Result = 3.88076e-08
+Minuit2Minimizer : Invalid minimum - status = 3
+FVAL  = 0.783725
+Edm   = 178030
+Nfcn  = 117
+Minimum: 0.783725
+  North Term Res: 10
+  South Term Res: 10
+  Gain Ratio: 1.01
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1
+   Step: 50, 50, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(50, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50_1.05.root
+KS Test Result = 0
+(50.7844, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50.7844_50_1.05.root
+KS Test Result = 0
+(49.2156, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_49.2156_50_1.05.root
+KS Test Result = 0
+(57.8121, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_57.8121_50_1.05.root
+KS Test Result = 0
+(42.1879, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_42.1879_50_1.05.root
+KS Test Result = 0
+(50, 50.7844, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50.7844_1.05.root
+KS Test Result = 0
+(50, 49.2156, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_49.2156_1.05.root
+KS Test Result = 0
+(50, 57.8121, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_57.8121_1.05.root
+KS Test Result = 0
+(50, 42.1879, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_42.1879_1.05.root
+KS Test Result = 0
+(50, 50, 1.0517)
+New file created. Path to file: wiresim_files130/wire_50_50_1.0517.root
+KS Test Result = 0
+(50, 50, 1.04833)
+New file created. Path to file: wiresim_files130/wire_50_50_1.04833.root
+KS Test Result = 0
+(50, 50, 1.06823)
+New file created. Path to file: wiresim_files130/wire_50_50_1.06823.root
+KS Test Result = 0
+(50, 50, 1.03456)
+New file created. Path to file: wiresim_files130/wire_50_50_1.03456.root
+KS Test Result = 0
+(50, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50_1.05.root
+KS Test Result = 0
+(57.8121, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_57.8121_50_1.05.root
+KS Test Result = 0
+(42.1879, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_42.1879_50_1.05.root
+KS Test Result = 0
+(74.4089, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_74.4089_50_1.05.root
+KS Test Result = 0
+(25.5911, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_25.5911_50_1.05.root
+KS Test Result = 0
+(50, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50_1.05.root
+KS Test Result = 0
+(57.8121, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_57.8121_50_1.05.root
+KS Test Result = 0
+(42.1879, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_42.1879_50_1.05.root
+KS Test Result = 0
+(74.4089, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_74.4089_50_1.05.root
+KS Test Result = 0
+(25.5911, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_25.5911_50_1.05.root
+KS Test Result = 0
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 1
+Edm   = 0
+Nfcn  = 23
+Minimum: 1
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.05
+
+Log for wire 130... 
+   Starting Values: 50, 50, 1
+   Step: 50, 50, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(50, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50_1.05.root
+KS Test Result = 0
+(50.7844, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50.7844_50_1.05.root
+KS Test Result = 0
+(49.2156, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_49.2156_50_1.05.root
+KS Test Result = 0
+(57.8121, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_57.8121_50_1.05.root
+KS Test Result = 0
+(42.1879, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_42.1879_50_1.05.root
+KS Test Result = 0
+(50, 50.7844, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50.7844_1.05.root
+KS Test Result = 0
+(50, 49.2156, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_49.2156_1.05.root
+KS Test Result = 0
+(50, 57.8121, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_57.8121_1.05.root
+KS Test Result = 0
+(50, 42.1879, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_42.1879_1.05.root
+KS Test Result = 0
+(50, 50, 1.0517)
+New file created. Path to file: wiresim_files130/wire_50_50_1.0517.root
+KS Test Result = 0
+(50, 50, 1.04833)
+New file created. Path to file: wiresim_files130/wire_50_50_1.04833.root
+KS Test Result = 0
+(50, 50, 1.06823)
+New file created. Path to file: wiresim_files130/wire_50_50_1.06823.root
+KS Test Result = 0
+(50, 50, 1.03456)
+New file created. Path to file: wiresim_files130/wire_50_50_1.03456.root
+KS Test Result = 0
+(50, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50_1.05.root
+KS Test Result = 0
+(57.8121, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_57.8121_50_1.05.root
+KS Test Result = 0
+(42.1879, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_42.1879_50_1.05.root
+KS Test Result = 0
+(74.4089, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_74.4089_50_1.05.root
+KS Test Result = 0
+(25.5911, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_25.5911_50_1.05.root
+KS Test Result = 0
+(50, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_50_50_1.05.root
+KS Test Result = 0
+(57.8121, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_57.8121_50_1.05.root
+KS Test Result = 0
+(42.1879, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_42.1879_50_1.05.root
+KS Test Result = 0
+(74.4089, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_74.4089_50_1.05.root
+KS Test Result = 0
+(25.5911, 50, 1.05)
+New file created. Path to file: wiresim_files130/wire_25.5911_50_1.05.root
+KS Test Result = 0
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 0
+Edm   = 0
+Nfcn  = 23
+Minimum: 0
+  North Term Res: 50
+  South Term Res: 50
+  Gain Ratio: 1.05
+
+Log for wire 130... 
+   Starting Values: 20, 20, 1
+   Step: 50, 50, 0.5
+Minuit2Minimizer: Minimize with max-calls 1000000 convergence for edm < 0.01 strategy 2
+(20, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20.3975, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_20.3975_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(19.6054, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_19.6054_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(24.1012, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_24.1012_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(16.1927, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_16.1927_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 20.3975, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_20.3975_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 19.6054, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_19.6054_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 24.1012, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_24.1012_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 16.1927, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_16.1927_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 20, 1.0517)
+New file created. Path to file: wiresim_files130/wire_20_20_1.0517.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 20, 1.04833)
+New file created. Path to file: wiresim_files130/wire_20_20_1.04833.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 20, 1.06823)
+New file created. Path to file: wiresim_files130/wire_20_20_1.06823.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 20, 1.03456)
+New file created. Path to file: wiresim_files130/wire_20_20_1.03456.root
+KS Test Result = 1.32794e-35
+Log Likelihood Result = 0
+(20, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(24.1012, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_24.1012_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(16.1927, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_16.1927_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(43.3448, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_43.3448_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(4.29057, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_4.29057_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(20, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_20_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(24.1012, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_24.1012_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(16.1927, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_16.1927_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(43.3448, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_43.3448_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+(4.29057, 20, 1.05)
+New file created. Path to file: wiresim_files130/wire_4.29057_20_1.05.root
+KS Test Result = 0
+Log Likelihood Result = 0
+Minuit2Minimizer : Invalid minimum - status = 2
+FVAL  = 0
+Edm   = 0
+Nfcn  = 23
+Minimum: 0
+  North Term Res: 20
+  South Term Res: 20
+  Gain Ratio: 1.05
