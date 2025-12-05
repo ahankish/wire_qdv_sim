@@ -6,10 +6,14 @@
 #include "Minuit2/LAVector.h"
 #include "Minuit2/LaInverse.h"
 #include "Minuit2/LaOuterProduct.h"
+#include "Minuit2/MnStrategy.h" 
+#include "Minuit2/Minuit2Minimizer.h"
 #include "Math/IFunctionfwd.h"
 #include "model_generator_v1.C"
+#include <vector>
 // Using the actual Minuit instead of Math::Minimizer
 
+int EntryNumber = 0; // To keep track of Minuit attempt - for plotting efficacy
 
 /*
 // Derived class from FCNBase
@@ -89,51 +93,85 @@ class FCNClass : public ROOT::Math::IMultiGenFunction {
   double DoEval(const double * x) const override {
     // Takes in the qdv parameters and returns a KS Test value for that model vs the data
 
-    if ((x[0] < 0) || (x[1] < 0) || (x[2] < 0)) { // to avoid weird minuit entries
-      return - std::log(1);
+    if ((x[0] <= 0) || (x[1] <= 0) || (x[2] <= 0)) { // to avoid weird minuit entries
+      //return std::log(1);
+      return 1000;
     }
 
-    // Generating the file
+    // New pointers 
+    //auto wirePos2 = make_unique<clas.>(args)
+    auto term_ResN = make_unique<std::string>(std::to_string(x[0]));
+    auto term_ResS = make_unique<std::string>(std::to_string(x[1]));
+    auto gain_Ratio = make_unique<std::string>(std::to_string(x[2]));
+    auto wirelo = make_unique<std::string>(std::to_string(static_cast<int>(x[3])));
+
+    std::string filename("wiresim_files");
+    filename.append(*wirelo);
+    filename.append("/");
+    filename += "wire_";
+    filename.append(*term_ResN);
+    filename += "_";
+    filename.append(*term_ResS);
+    filename += "_";
+    filename.append(*gain_Ratio);
+    filename += ".root";
+
+
     model_generator_v1(x[0], x[1], x[2], 1,
-                        "../../helixfiles/acptsim_merged_excl2.root", x[3]);
-
-    std::ostringstream term_ResN, term_ResS, gain_Ratio, wirepos;
-    term_ResN << x[0];
-    term_ResS << x[1];
-    gain_Ratio << x[2];
-    wirepos << x[3];
-    std::string termResN = term_ResN.str();
-    std::string termResS = term_ResS.str();
-    std::string gainRatio = gain_Ratio.str();
-    std::string wirelo = wirepos.str();
-    std::string backslash("/");
-
-    // making the filename
-    std::string filename = "wiresim_files" + wirelo + backslash + "wire_" + termResN + 
-                            "_" + termResS + "_" + gainRatio + ".root";
-
-    // opening the model file
+                          "../../helixfiles/acptsim_merged_excl2.root", x[3]);
+                  
+    // Opening the model file
     std::unique_ptr<TFile> myFile( TFile::Open(filename.c_str()) );
-    if (!myFile || myFile->IsZombie()) { // checking if the file opened properly
-      // the file doesn't exist and the program will skip to the next model 
-      return - std::log(1);
-    }
-
 
     std::unique_ptr<TH1> model(myFile->Get<TH1>("Charge Division calculated")); // the model histogram
-    //std::unique_ptr<TH1> model(myFile->Get<TH1>("Charge Division calculated")); // the model histogram
-
 
     std::unique_ptr<TFile> testFile( TFile::Open("wiresim_files130/test_hist.root") ); // 10, 10, 1.5 (example of data for test)
     TH1D* test_hist = (TH1D *) testFile->Get("Charge Division calculated");
 
-
+    /*
     double test = model->KolmogorovTest(test_hist);
+    
     if (test < 0) {
-      return 1;
+      //return std::log(1);
+      std::cout << "KS Test Result = " << test << std::endl;
+      std::cout << "Negative KS test result. Returning 1000." << std::endl;
+      return 1000;
     }
-    std::cout << "KS Test Result = " << test  << "\n- Log Likelihood Result = " << 0 - std::log(test) << std::endl;
-    return 0 - std::log(test);
+    else if (std::isinf(0 - std::log(test))) {
+      //return std::log(1);
+      std::cout << "0 KS test result. Returning 1000." << std::endl;
+      std::cout << "\n- Log Likelihood Result = " << 0 - std::log(test) << std::endl;
+      return 1000;
+    }
+
+    else {
+      std::cout << "KS Test Result = " << test  << "\n- Log Likelihood Result = " << 0 - std::log(test) << std::endl;
+
+      return 0 - std::log(test);
+    }
+    */
+
+    // Performing Chi^2 test: 
+    int num_bins = 200;
+    double chi2 = 0; 
+    for (int i = 1; i <= num_bins; i++) {
+              //std::cout << model->GetBinContent(i) << " " << test_hist->GetBinContent(i) << std::endl;
+      //std::cout << model->GetEntries() << " " << test_hist->GetEntries() << std::endl;
+      if (model->GetBinContent(i) <= 0) {
+        continue;
+      }
+      else {
+        chi2 += pow((test_hist->GetBinContent(i)/100) - (model->GetBinContent(i)), 2) / (model->GetBinContent(i));
+      }
+    }
+
+    std::cout << "Chi^2 Result = " << chi2/num_bins << "\n"<< std::endl;
+
+    // Marking Entry Number and adding to efficacy plot 
+    EntryNumber++;
+    return chi2/num_bins;
+    // Deallocating memory
+    //delete test_hist;
   }
 
 };
@@ -144,23 +182,37 @@ void minuit_min(int wirepos) {
   //Minuit2Minimizer* min = new Minuit2Minimizer();
   ROOT::Minuit2::Minuit2Minimizer* min = new ROOT::Minuit2::Minuit2Minimizer();
 
+  // Instance of the Strategy class MnStrategy
+  ROOT::Minuit2::MnStrategy* strat = new ROOT::Minuit2::MnStrategy();
+  strat->SetHighStrategy(); // the minimizer will waste no resources looking for the minimum
+
   FCNClass f;
-  //ROOT::Math::IMultiGenFunction f = new FCNClass();
 
   min->SetFunction(f);
   // Setting Variables
-  double step[3] = { 50,50,0.5 }; // close to 50 ohms 
-  
-  // starting point
-  double variable[3];
-  variable[0] = 50;
-  variable[1] = 50;
-  variable[2] = 1.;
+  double step[3] = { 5,5,0.5 }; // close to 50 ohms 
 
+  // starting point
+  double variable[3] = {5,20,0.9};
+  double lower[3] = {0.0000001, 0.0000001, 0.0000001};
+  double upper[3] = {300, 300, 10};
+  /*
+  //starting point
+  std::unique_ptr<double> variable[3];
+  variable[0] = 20; 
+  */
+
+  min->SetLimitedVariable(0, "north termination resistance", variable[0], step[0], lower[0], upper[0]); 
+  min->SetLimitedVariable (1, "south termination resistance",variable[1], step[1], lower[1], upper[1]);
+  min->SetLimitedVariable(	2, "gain ratio",variable[2], step[2], lower[2], upper[2]);
+  min->SetFixedVariable(3, "wire location", wirepos); // position of the wire in the dct
+
+  /*
   min->SetLowerLimitedVariable(	0, "north termination resistance",variable[0], step[0], 0);
   min->SetLowerLimitedVariable(	1, "south termination resistance",variable[1], step[1], 0);
   min->SetLowerLimitedVariable(	2, "gain ratio",variable[2], step[2], 0);
   min->SetFixedVariable(3, "wire location", wirepos); // position of the wire in the dct
+  */
 
   bool min_status = min->Minimize();
 
@@ -172,5 +224,11 @@ void minuit_min(int wirepos) {
   std::cout << "North termination resistance minimum: " << mins[0] << std::endl;
   std::cout << "South termination resistance minimum: " << mins[1] << std::endl;
   std::cout << "Gain ratio minimum: " << mins[2] << std::endl;
+
+
+  // Deallocating Memory
+  delete min;
+  delete strat;
+  delete &f;
 
 }
