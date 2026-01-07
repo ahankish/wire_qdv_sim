@@ -11,9 +11,10 @@
 #include "Math/IFunctionfwd.h"
 #include "model_generator_v1.C"
 #include <vector>
-#include<TRandom.h>
-#include<TCanvas.h>
-#include<TH1D.h>
+#include "TRandom.h"
+#include "TCanvas.h"
+#include "TH1D.h"
+#include "TApplication.h"
 
 
 // Using the actual Minuit instead of Math::Minimizer
@@ -23,11 +24,10 @@ int EntryNumber = 0; // To keep track of Minuit attempt - for plotting efficacy
 // essentially debugging 
 
 // Plotting Residuals: 
-TCanvas* rCanvas = new TCanvas("randComp","Residuals of Minimization Parameter", 200,50,600,600);
-rCanvas->Divide(1, 3); // one plot for each parameter
+std::unique_ptr<TCanvas> newCanvas(new TCanvas("randComp","Residuals of Minimization Parameter", 200,50,600,600));
 
 // Storing the residual values 
-TH1D* resPlt = new TH1D("residuals","Residuals of Minimization Parameter", 100, -50, 50);
+std::unique_ptr<TH1D> resPlt(new TH1D("residuals","Residuals of Minimization Parameter", 100, -50, 50));
 
 
 // Derived class from IBaseFunctionMultiDim
@@ -99,7 +99,7 @@ class FCNClass : public ROOT::Math::IMultiGenFunction {
     std::cout << "Chi^2 Result = " << chi2/num_bins << "\n"<< std::endl;
 
     // Adding to residuals plot: 
-    resPlt->Fill(chi2/num_bins - 10); // predicted value - observed value
+    resPlt->Fill(chi2/num_bins); // predicted value - observed value
 
     // Marking Entry Number and adding to efficacy plot 
     EntryNumber++;
@@ -164,7 +164,8 @@ void minuit_min2(int wirepos) {
   delete strat;
   delete &f;
 
+  resPlt->DrawClone(); // drawing the residuals plot on the canvas4
+  newCanvas->SaveAs("residuals_plot.jpg"); // saving the plot as a jpg file
+
 }
 
-resPlt->Draw(); // drawing the residuals plot on the canvas
-//rCanvas->SaveAs("residuals_plot.jpg"); // saving the plot as a png file
