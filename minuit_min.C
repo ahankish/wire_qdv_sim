@@ -14,68 +14,8 @@
 // Using the actual Minuit instead of Math::Minimizer
 
 int EntryNumber = 0; // To keep track of Minuit attempt - for plotting efficacy
+// essentially debugging 
 
-/*
-// Derived class from FCNBase
-class FCNClass : public ROOT::Minuit2::FCNBase {
-  // Member Variables
-
-  // Member Functions 
-  double operator()(const std::vector<double>&v) const override {
-    // Takes in the qdv parameters and returns a KS Test value for that model vs the data
-
-    if ((v[0] < 0) || (v[1] < 0) || (v[2] < 0)) { // to avoid weird minuit entries
-      return - std::log(1);
-    }
-
-    // Generating the file
-    model_generator_v1(v[0], v[1], v[2], 1,
-                        "../../helixfiles/acptsim_merged_excl2.root", v[3]);
-
-    std::ostringstream term_ResN, term_ResS, gain_Ratio, wirepos;
-    term_ResN << v[0];
-    term_ResS << v[1];
-    gain_Ratio << v[2];
-    wirepos << v[3];
-    std::string termResN = term_ResN.str();
-    std::string termResS = term_ResS.str();
-    std::string gainRatio = gain_Ratio.str();
-    std::string wirelo = wirepos.str();
-    std::string backslash("/");
-
-    // making the filename
-    std::string filename = "wiresim_files" + wirelo + backslash + "wire_" + termResN + 
-                            "_" + termResS + "_" + gainRatio + ".root";
-
-    // opening the model file
-    std::unique_ptr<TFile> myFile( TFile::Open(filename.c_str()) );
-    if (!myFile || myFile->IsZombie()) { // checking if the file opened properly
-      // the file doesn't exist and the program will skip to the next model 
-      return - std::log(1);
-    }
-
-
-    std::unique_ptr<TH1> model(myFile->Get<TH1>("Charge Division calculated")); // the model histogram
-    //std::unique_ptr<TH1> model(myFile->Get<TH1>("Charge Division calculated")); // the model histogram
-
-
-    std::unique_ptr<TFile> testFile( TFile::Open("wiresim_files130/test_hist.root") ); // 10, 10, 1.5 (example of data for test)
-    TH1D* test_hist = (TH1D *) testFile->Get("Charge Division calculated");
-
-
-    double test = model->KolmogorovTest(test_hist);
-    if (test < 0) {
-      return 1;
-    }
-    std::cout << "KS Test Result = " << test  << "\n- Log Likelihood Result = " << 0 - std::log(test) << std::endl;
-    return 0 - std::log(test);
-  }
-
-  double Up() const override {
-    return 0;
-  }
-};
-*/
 
 // Derived class from IBaseFunctionMultiDim
 class FCNClass : public ROOT::Math::IMultiGenFunction {

@@ -330,7 +330,8 @@ int main(int argc, char *argv[]) {
   std::string folder = "wiresim_files" + std::string(argv[6]) + "/";
   //std::string original = "_original";
 
-  std::string path = folder + prefix + term_resN_str + underscore + term_resS_str + underscore + gainstr.substr(0,4) + root_str;
+  //std::string path = folder + prefix + term_resN_str + underscore + term_resS_str + underscore + gainstr.substr(0,4) + root_str;
+  std::string path = prefix + term_resN_str + underscore + term_resS_str + underscore + gainstr.substr(0,4) + root_str;
 
   const char *path_c = path.c_str();
 
